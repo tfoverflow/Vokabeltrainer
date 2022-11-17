@@ -1,2 +1,2 @@
 # Vokabeltrainer
-train your vokabels
+Trainieren Sie Ihre Vokabeln! ^_^
