@@ -1,9 +1,11 @@
 package net.tfobz.vokabeltrainer.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
@@ -30,13 +32,17 @@ public class MainMenu extends JFrame {
 		// Setzt das Theme auf dem vom Benutzer ausgewählten Theme, (z.B. gtk+, windows, ...)
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			//Bugfix: Wenn Gtk Theme benutzt wird, dann wird Background nicht benutzt
+			if(UIManager.getSystemLookAndFeelClassName() == "com.sun.java.swing.plaf.gtk.GTKLookAndFeel") {
+				this.getContentPane().setBackground(new Color(56, 56, 56));
+			}
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		JLabel titel = new JLabel("Vokabeltrainer");
+		titel.setFont(new Font("Karumbi", Font.BOLD, 85));
 		titel.setHorizontalAlignment(JLabel.CENTER);
 		
 		JButton createLernkartei = new JButton("Neue Lernkartei");
