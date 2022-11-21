@@ -10,6 +10,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -22,15 +24,14 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
 
-public class MainMenu extends JFrame {
+public class MainMenu extends JPanel {
 	Dimension buttonsize = new Dimension(300, 75);
-
-	public MainMenu() {
-		this.setTitle("Vokableltrainer - MainMenu");
-		this.setSize(1200, 800); // Default Fenstergroesse, wenn Fenster nicht maximiert ist
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH); // Starte Fenster maximiert
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.getContentPane().setLayout(new GridBagLayout());
+	StartVokabeltrainer parentFrame = null;
+	
+	public MainMenu(StartVokabeltrainer parentFrame) {
+		this.parentFrame = parentFrame;
+		
+		this.setLayout(new GridBagLayout());
 
 		// Setzt das Theme auf dem vom Benutzer ausgewählten Theme, (z.B. gtk+, windows,
 		// ...)
@@ -38,7 +39,7 @@ public class MainMenu extends JFrame {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			// Bugfix: Wenn Gtk Theme benutzt wird, dann wird Background nicht benutzt
 			if (UIManager.getSystemLookAndFeelClassName() == "com.sun.java.swing.plaf.gtk.GTKLookAndFeel") {
-				this.getContentPane().setBackground(new Color(56, 56, 56));
+				this.setBackground(new Color(56, 56, 56));
 			}
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| UnsupportedLookAndFeelException e) {
@@ -46,7 +47,7 @@ public class MainMenu extends JFrame {
 		}
 		// Defniere Komponenten
 		JLabel titel = new JLabel("Vokabeltrainer");
-		titel.setFont(new Font("Karumbi", Font.BOLD, 150));
+		titel.setFont(new Font("Karumbi	", Font.BOLD, 100));
 		titel.setHorizontalAlignment(JLabel.CENTER);
 
 		JButton createLernkartei = new JButton("Neue Lernkartei");
@@ -54,11 +55,30 @@ public class MainMenu extends JFrame {
 		JButton viewLernkartein = new JButton("Lernkarteienübersicht");
 		viewLernkartein.setPreferredSize(buttonsize);
 		GridBagConstraints c = new GridBagConstraints();
+		
+		//ActionListener für Buttons
+		createLernkartei.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				parentFrame.changeToCreateLernkartei();
+			}
+		});
+		
+		viewLernkartein.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				parentFrame.changeToViewLernkarteien();
+			}
+		});
+		
 
 		// Platziere Komponenten
 		c.gridx = 1;
 		c.gridy = 1;
 		c.gridwidth = 3;
+		c.insets = new Insets(0, 0, 100, 0);
 		this.add(titel, c);
 
 		c.gridx = 1;
