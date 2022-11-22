@@ -1,5 +1,7 @@
 package net.tfobz.vokabeltrainer.gui;
 
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 
 import net.tfobz.vokabeltrainer.model.Lernkartei;
@@ -15,6 +17,7 @@ public class StartVokabeltrainer extends JFrame {
 		this.setSize(1200, 800); // Default Fenstergroesse, wenn Fenster nicht maximiert ist
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); // Starte Fenster maximiert
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setMinimumSize(new Dimension(800,500));
 		
 		mainMenu = new MainMenu(this);
 		createLernkartei = new CreateLernkartei();
@@ -24,9 +27,7 @@ public class StartVokabeltrainer extends JFrame {
 	public static void main(String[] args) {
 //		MainMenu mainMenu = new MainMenu();
 //		mainMenu.setVisible(true);
-		Lernkartei kartei = new Lernkartei();
-		kartei.setBeschreibung("testkartei");
-		VokabeltrainerDB.hinzufuegenLernkartei(kartei);
+		
 		StartVokabeltrainer f = new StartVokabeltrainer();
 		f.setVisible(true);
 		

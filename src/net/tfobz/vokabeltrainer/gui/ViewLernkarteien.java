@@ -12,7 +12,7 @@ public class ViewLernkarteien extends JPanel {
 	public ViewLernkarteien() {
 //		this.add(new JLabel("Lernkarteienuebersicht"));
 		sammlung = new LernkarteienSammlung();
-		sammlung.setSize(new Dimension(1000,800));
+		sammlung.setSize((int) (this.getPreferredSize().getWidth()/2),0);
 		sammlung.setBorder(BorderFactory.createLineBorder(Color.blue));
 		this.add(sammlung);
 //		sammlung.setBackground(new Color(255, 0, 0));
