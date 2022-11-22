@@ -3,13 +3,20 @@ package net.tfobz.vokabeltrainer.gui;
 import javax.swing.JFrame;
 
 public class StartVokabeltrainer extends JFrame {
+	MainMenu mainMenu = null;
+	CreateLernkartei createLernkartei = null;
+	ViewLernkarteien viewLernkarteien = null;
+	
 	public StartVokabeltrainer() {
-		this.setTitle("Vokableltrainer - MainMenu");
+		
 		this.setSize(1200, 800); // Default Fenstergroesse, wenn Fenster nicht maximiert ist
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); // Starte Fenster maximiert
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		this.add(new MainMenu(this));
+		mainMenu = new MainMenu(this);
+		createLernkartei = new CreateLernkartei();
+		viewLernkarteien = new ViewLernkarteien();
+		this.changeToMainMenu();
 	}
 	public static void main(String[] args) {
 //		MainMenu mainMenu = new MainMenu();
@@ -18,11 +25,23 @@ public class StartVokabeltrainer extends JFrame {
 		f.setVisible(true);
 		
 	}
+	public void changeToMainMenu() {
+		this.getContentPane().removeAll();
+		this.add(mainMenu);
+		this.setTitle("Vokableltrainer - MainMenu");
+		this.revalidate();
+	 }
 	public void changeToCreateLernkartei() {
-		System.out.println("Test1");
+		this.getContentPane().removeAll();
+		this.add(createLernkartei);
+		this.setTitle("Vokableltrainer - Lernkartei erstellen");
+		this.revalidate();
 	 }
 	public void changeToViewLernkarteien() {
-		System.out.println("Test2");
+		this.getContentPane().removeAll();
+		this.add(viewLernkarteien);
+		this.setTitle("Vokableltrainer - Lernkarteienübersicht");
+		this.revalidate();
 	 }
 
 }
