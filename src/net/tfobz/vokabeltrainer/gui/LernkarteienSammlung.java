@@ -1,7 +1,7 @@
 package net.tfobz.vokabeltrainer.gui;
 
 import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.FlowLayout;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -11,8 +11,10 @@ public class LernkarteienSammlung extends JPanel {
 	ArrayList<Lernkartei> sammlung = null;
 
 	public LernkarteienSammlung() {
-		this.setLayout(new GridLayout(0, 4, 50, 50));
+		this.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 20));
+		this.setMinimumSize(new Dimension(1200,1000));
 		reloadLernkarteien();
+		
 	}
 
 	public void reloadLernkarteien() {

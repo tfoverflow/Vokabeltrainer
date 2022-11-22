@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -21,12 +22,18 @@ public class LernkarteiComponent extends JComponent {
 		
 		this.setBackground(new Color(0, 255, 0));
 		this.setMinimumSize(new Dimension(250, 200));
+		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
 		percent = new JLabel(getPercent());
+		percent.setPreferredSize(new Dimension(250, 100));
+		percent.setBorder(BorderFactory.createLineBorder(Color.gray));
+		
 		name = new JLabel(kartei.getBeschreibung());
+		name.setPreferredSize(new Dimension(200, 50));
+		name.setBorder(BorderFactory.createLineBorder(Color.gray));
 		playButton = new JButton();
 		
 		c.gridx = 0;
@@ -49,6 +56,6 @@ public class LernkarteiComponent extends JComponent {
 	}
 	
 	private String getPercent() {
-		return "42%";
+		return "69%";
 	}
 }

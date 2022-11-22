@@ -69,7 +69,7 @@ public class VokabeltrainerDB
 	protected static final String INSERT_LERNKARTEI2 = "INSERT INTO lernkarteien(lbeschreibung, lworteinsbeschreibung, lwortzweibeschreibung, lrichtung, lgrosskleinschreibung) "
 			+ "  VALUES('Vokabeltrainer Deutsch Italienisch','Deutsch','Italienisch',false,true);";
 	protected static final String INSERT_LERNKARTEI3 = "INSERT INTO lernkarteien(lbeschreibung, lworteinsbeschreibung, lwortzweibeschreibung, lrichtung, lgrosskleinschreibung) "
-			+ "  VALUES('Vokabeltrainer Deutsch Franz�sisch','Deutsch','Franz�sisch',false,true);";
+			+ "  VALUES('Vokabeltrainer Deutsch Franz�sisch','Deutsch','Französisch',false,true);";
 	protected static final String INSERT_FACH11 = "INSERT INTO faecher(fbeschreibung, ferinnerung, fgelerntam, lnummer) "
 			+ "  VALUES('Fach 1',0,'" + getActualDate() + "', 1);";
 	protected static final String INSERT_FACH21 = "INSERT INTO faecher(fbeschreibung, ferinnerung, fgelerntam, lnummer) "
@@ -79,11 +79,11 @@ public class VokabeltrainerDB
 
 	static {
 		// L�scht Tabellen
-		loeschenTabellen();
+		// loeschenTabellen();
 		// Erstellen der Tabellen falls nicht vorhanden
-		erstellenTabellen();
+		// erstellenTabellen();
 		// Hinzuf�gen von Testdaten
-		hinzufuegenTestdaten();
+		// hinzufuegenTestdaten();
 	}
 
 	/**
