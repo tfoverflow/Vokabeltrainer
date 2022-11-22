@@ -27,6 +27,7 @@ import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
 public class MainMenu extends JPanel {
 	Dimension buttonsize = new Dimension(300, 75);
 	StartVokabeltrainer parentFrame = null;
+	Import importDialog = null;
 	
 	public MainMenu(StartVokabeltrainer parentFrame) {
 		this.parentFrame = parentFrame;
@@ -38,9 +39,8 @@ public class MainMenu extends JPanel {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			// Bugfix: Wenn Gtk Theme benutzt wird, dann wird Background nicht benutzt
-			if (UIManager.getSystemLookAndFeelClassName() == "com.sun.java.swing.plaf.gtk.GTKLookAndFeel") {
+			if (UIManager.getSystemLookAndFeelClassName() == "com.sun.java.swing.plaf.gtk.GTKLookAndFeel")
 				this.setBackground(new Color(56, 56, 56));
-			}
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
@@ -50,6 +50,8 @@ public class MainMenu extends JPanel {
 		titel.setFont(new Font("Karumbi	", Font.BOLD, 100));
 		titel.setHorizontalAlignment(JLabel.CENTER);
 
+		JButton settings = new JButton();
+		settings.setPreferredSize(new Dimension(75, 75));
 		JButton createLernkartei = new JButton("Neue Lernkartei");
 		createLernkartei.setPreferredSize(buttonsize);
 		JButton viewLernkartein = new JButton("Lernkarteienübersicht");
@@ -57,6 +59,15 @@ public class MainMenu extends JPanel {
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//ActionListener für Buttons
+		settings.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				importDialog = new Import();
+				
+			}
+		});
+		
 		createLernkartei.addActionListener(new ActionListener() {
 			
 			@Override
@@ -75,12 +86,21 @@ public class MainMenu extends JPanel {
 		
 
 		// Platziere Komponenten
+		//Titel
 		c.gridx = 1;
 		c.gridy = 1;
 		c.gridwidth = 3;
 		c.insets = new Insets(0, 0, 100, 0);
 		this.add(titel, c);
+		
+		//Settings
+		c.gridx = 5;
+		c.gridy = 0;
+		c.gridwidth = 3;
+		c.insets = new Insets(0, 0, 100, 0);
+		this.add(settings, c);
 
+		//Erstellen / Ansehen
 		c.gridx = 1;
 		c.gridy = 3;
 		c.gridwidth = 1;
