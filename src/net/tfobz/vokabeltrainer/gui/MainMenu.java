@@ -64,7 +64,7 @@ public class MainMenu extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				importDialog = new Import();
-				
+				importDialog.setVisible(true);
 			}
 		});
 		
