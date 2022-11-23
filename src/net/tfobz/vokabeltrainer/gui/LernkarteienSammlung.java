@@ -11,7 +11,8 @@ public class LernkarteienSammlung extends JPanel {
 	ArrayList<Lernkartei> sammlung = null;
 
 	public LernkarteienSammlung() {
-		this.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 20));
+		this.setLayout(new FlowLayout(FlowLayout.LEFT, 50,20));
+		this.setLocation(0, 200);
 		this.setMinimumSize(new Dimension(1200,1000));
 		reloadLernkarteien();
 		
