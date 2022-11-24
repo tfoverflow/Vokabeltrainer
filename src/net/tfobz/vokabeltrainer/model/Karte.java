@@ -101,6 +101,9 @@ public class Karte
 	public int getNummer() {
 		return nummer;
 	}
+	public void setNummer(int nummer) {
+		this.nummer = nummer;
+	}
 	public String getWortEins() {
 		return wortEins;
 	}
