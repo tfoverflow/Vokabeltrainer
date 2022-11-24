@@ -24,9 +24,6 @@ public class StartVokabeltrainer extends JFrame {
 	public static void main(String[] args) {
 //		MainMenu mainMenu = new MainMenu();
 //		mainMenu.setVisible(true);
-		Lernkartei kartei = new Lernkartei();
-		kartei.setBeschreibung("testkartei");
-		VokabeltrainerDB.hinzufuegenLernkartei(kartei);
 		StartVokabeltrainer f = new StartVokabeltrainer();
 		f.setVisible(true);
 		

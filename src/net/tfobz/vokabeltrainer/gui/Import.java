@@ -109,6 +109,7 @@ public class Import extends JDialog {
 		importButton = new JButton("Datei auswählen...");
 		importButton.setPreferredSize(new Dimension(150, 40));
 		labelSelectedFile = new JLabel();
+		labelSelectedFile.setHorizontalAlignment(JLabel.RIGHT);
 		importButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -156,15 +157,10 @@ public class Import extends JDialog {
 				}
 				
 				if(isAllDataInserted) {
-					try {
-						saveLernkartei(karten, textfield[0].getText().trim(), textfield[1].getText().trim(), textfield[2].getText().trim(), grossKleinschreibung.isSelected());
-					} catch (DatenBankException e1) {
-						JOptionPane.showMessageDialog(null, e1.getMessage(), e1.getClass().toString(),
-								JOptionPane.ERROR_MESSAGE);
-						//Loesche letzte hinzugefügte Lernkartei, da fehler aufgetreten ist
-						ArrayList<Lernkartei> hinzugefuegteLernkartei = (ArrayList<Lernkartei>) VokabeltrainerDB.getLernkarteien();
-						VokabeltrainerDB.loeschenLernkartei(hinzugefuegteLernkartei.get(hinzugefuegteLernkartei.size()-1).getNummer());
-					}
+					Lernkartei kartei = new Lernkartei(textfield[0].getText().trim(), textfield[1].getText().trim(), textfield[2].getText().trim(), false, grossKleinschreibung.isSelected());
+					VokabeltrainerDB.hinzufuegenLernkartei(kartei);
+					VokabeltrainerDB.importierenKarten(kartei.getNummer(), labelSelectedFile.getText());
+					setVisible(false);
 				}
 			}
 		});
@@ -198,7 +194,15 @@ public class Import extends JDialog {
 		this.add(panels[5], c);
 		
 	}
-
+	
+	/**
+	 * Liest alle Karten aus einer Datei
+	 * @param input
+	 * @param grossKleinschreibung
+	 * @return
+	 * @throws IOException
+	 * @throws IllegalArgumentException
+	 */
 	public static ArrayList<Karte> parseLernkartei(File input, boolean grossKleinschreibung)
 			throws IOException, IllegalArgumentException {
 		ArrayList<Karte> ret = new ArrayList<>();
@@ -219,11 +223,16 @@ public class Import extends JDialog {
 			int num = readLineSplit.length == 2 ? 0 : Integer.parseInt(readLineSplit[2].trim());
 			ret.add(new Karte(num, readLineSplit[0], readLineSplit[1], false, grossKleinschreibung));
 		}
-		System.out.println(ret.toString());
+//		System.out.println(ret.toString());
 		reader.close();
 		return ret;
 	}
 
+	/*
+	 * Hab 3 Stunden meines Leben verschwendet, das zu programmieren, 
+	 * bis ich herausgefunden, dass importieren schon in VokabeltrainerDB existiert.
+	 * Ich werde das ganz sicher nicht löschen!
+	 *
 	private void saveLernkartei(ArrayList<Karte> karten,
 			String beschreibung,
 			String ersteSprache,
@@ -278,7 +287,7 @@ public class Import extends JDialog {
 				}
 				default:
 			}
-			VokabeltrainerDB
 		}
 	}
+	*/
 }
