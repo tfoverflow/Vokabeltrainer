@@ -91,6 +91,7 @@ public class VokabeltrainerDB
 	 * Datenbank zuzugreifen
 	 * @param args
 	 */
+	/*
 	public static void main(String[] args) {
 		// Gibt alle Lernkarteien aus
 		List<Lernkartei> lernkarteien = VokabeltrainerDB.getLernkarteien();
@@ -108,6 +109,7 @@ public class VokabeltrainerDB
 		Karte k = VokabeltrainerDB.getZufaelligeKarte(lernkartei.getNummer(), fach.getNummer());
 		System.out.println(k);
 	}
+	*/
 	
 	/**
 	 * ACHTUNG: In die Einstellungen-Tabelle wird ein Datensatz hineingeschrieben
@@ -616,6 +618,9 @@ public class VokabeltrainerDB
 	 */
 	public static int hinzufuegenFach(int nummerLernkartei, Fach fach) {
 	  int ret = -1;
+	  System.out.println(fach != null);
+	  System.out.println(fach.getNummer() == -1);
+	  System.out.println(getLernkartei(nummerLernkartei) != null);
 		if (fach != null && fach.getNummer() == -1 && getLernkartei(nummerLernkartei) != null) {
 			Connection con = null;
 			Statement stmt = null;
