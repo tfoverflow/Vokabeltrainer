@@ -1,4 +1,4 @@
-package net.tfobz.vokabeltrainer.gui;
+package net.tfobz.vokabeltrainer.gui.createLernkartei;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

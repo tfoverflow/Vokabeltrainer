@@ -1,4 +1,4 @@
-package net.tfobz.vokabeltrainer.gui;
+package net.tfobz.vokabeltrainer.gui.viewLernkarteien;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -43,7 +43,7 @@ public class LernkarteiComponent extends JComponent {
 		
 		playButton = new JButton();
 		playButton.setPreferredSize(new Dimension(40,40));
-		ImageIcon play_arrow = new ImageIcon("src/net/tfobz/vokabeltrainer/gui/play_arrow.png");
+		ImageIcon play_arrow = new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/play_arrow.png");
 		playButton.setIcon(play_arrow);
 		
 		this.setBorder(BorderFactory.createLineBorder(Color.gray));

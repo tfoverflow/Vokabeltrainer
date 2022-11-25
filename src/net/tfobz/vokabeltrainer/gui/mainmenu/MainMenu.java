@@ -1,4 +1,4 @@
-package net.tfobz.vokabeltrainer.gui;
+package net.tfobz.vokabeltrainer.gui.mainmenu;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -22,6 +22,8 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import net.tfobz.vokabeltrainer.gui.StartVokabeltrainer;
+import net.tfobz.vokabeltrainer.gui.createLernkartei.Import;
 import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
 
 public class MainMenu extends JPanel {

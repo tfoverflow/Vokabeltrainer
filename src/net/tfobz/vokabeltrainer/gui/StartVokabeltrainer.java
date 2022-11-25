@@ -4,6 +4,9 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+import net.tfobz.vokabeltrainer.gui.createLernkartei.CreateLernkartei;
+import net.tfobz.vokabeltrainer.gui.mainmenu.MainMenu;
+import net.tfobz.vokabeltrainer.gui.viewLernkarteien.ViewLernkarteien;
 import net.tfobz.vokabeltrainer.model.Lernkartei;
 import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
 

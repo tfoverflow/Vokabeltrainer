@@ -1,4 +1,4 @@
-package net.tfobz.vokabeltrainer.gui;
+package net.tfobz.vokabeltrainer.gui.viewLernkarteien;
 
 import java.awt.Color;
 import java.awt.Dimension;
