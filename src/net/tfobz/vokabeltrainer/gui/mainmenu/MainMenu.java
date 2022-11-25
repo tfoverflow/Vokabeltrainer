@@ -29,7 +29,6 @@ import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
 public class MainMenu extends JPanel {
 	Dimension buttonsize = new Dimension(300, 75);
 	StartVokabeltrainer parentFrame = null;
-	Import importDialog = null;
 	
 	public MainMenu(StartVokabeltrainer parentFrame) {
 		this.parentFrame = parentFrame;
@@ -52,23 +51,14 @@ public class MainMenu extends JPanel {
 		titel.setFont(new Font("Karumbi	", Font.BOLD, 100));
 		titel.setHorizontalAlignment(JLabel.CENTER);
 
-		JButton settings = new JButton();
-		settings.setPreferredSize(new Dimension(75, 75));
+		
 		JButton createLernkartei = new JButton("Neue Lernkartei");
 		createLernkartei.setPreferredSize(buttonsize);
 		JButton viewLernkartein = new JButton("Lernkarteienübersicht");
 		viewLernkartein.setPreferredSize(buttonsize);
 		GridBagConstraints c = new GridBagConstraints();
 		
-		//ActionListener für Buttons
-		settings.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				importDialog = new Import();
-				importDialog.setVisible(true);
-			}
-		});
+		
 		
 		createLernkartei.addActionListener(new ActionListener() {
 			
@@ -94,13 +84,6 @@ public class MainMenu extends JPanel {
 		c.gridwidth = 3;
 		c.insets = new Insets(0, 0, 100, 0);
 		this.add(titel, c);
-		
-		//Settings
-		c.gridx = 5;
-		c.gridy = 0;
-		c.gridwidth = 3;
-		c.insets = new Insets(0, 0, 100, 0);
-		this.add(settings, c);
 
 		//Erstellen / Ansehen
 		c.gridx = 1;
