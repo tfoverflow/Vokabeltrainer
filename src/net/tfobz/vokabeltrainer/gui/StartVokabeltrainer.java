@@ -37,19 +37,19 @@ public class StartVokabeltrainer extends JFrame {
 	public void changeToMainMenu() {
 		this.getContentPane().removeAll();
 		this.add(mainMenu);
-		this.setTitle("Vokableltrainer - MainMenu");
+		this.setTitle("Vokabeltrainer - MainMenu");
 		this.revalidate();
 	 }
 	public void changeToCreateLernkartei() {
 		this.getContentPane().removeAll();
 		this.add(createLernkartei);
-		this.setTitle("Vokableltrainer - Lernkartei erstellen");
+		this.setTitle("Vokabeltrainer - Lernkartei erstellen");
 		this.revalidate();
 	 }
 	public void changeToViewLernkarteien() {
 		this.getContentPane().removeAll();
 		this.add(viewLernkarteien);
-		this.setTitle("Vokableltrainer - Lernkarteienübersicht");
+		this.setTitle("Vokabeltrainer - Lernkarteienübersicht");
 		this.revalidate();
 	 }
 
