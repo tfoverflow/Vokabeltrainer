@@ -144,7 +144,7 @@ public class Import extends JDialog {
 				boolean isAllDataInserted = true;
 				// Kontrolle, ob alle benoetigten Daten eingegeben wurden
 				for(int i = 0; i < 3; i++) {
-					if(textfield[i].getText().isBlank()) {
+					if(textfield[i].getText().trim().isEmpty()) {
 						textfield[i].setBorder(BorderFactory.createLineBorder(Color.red));
 						isAllDataInserted = false;
 					}
