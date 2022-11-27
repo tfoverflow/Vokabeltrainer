@@ -10,9 +10,10 @@ import net.tfobz.vokabeltrainer.gui.viewLernkarteien.ViewLernkarteien;
 
 public class StartVokabeltrainer extends JFrame {
 	private static final long serialVersionUID = -8366371103918318718L;
-	MainMenu mainMenu = null;
-	CreateLernkartei createLernkartei = null;
-	ViewLernkarteien viewLernkarteien = null;
+	
+	private MainMenu mainMenu = null;
+	private CreateLernkartei createLernkartei = null;
+	private ViewLernkarteien viewLernkarteien = null;
 	
 	public StartVokabeltrainer() {
 		

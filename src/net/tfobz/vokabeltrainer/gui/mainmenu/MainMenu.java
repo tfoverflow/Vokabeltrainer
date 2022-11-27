@@ -19,7 +19,8 @@ import net.tfobz.vokabeltrainer.gui.StartVokabeltrainer;
 
 public class MainMenu extends JPanel {
 	private static final long serialVersionUID = -7222145189470706501L;
-	Dimension buttonsize = new Dimension(300, 75);
+	
+	private Dimension buttonsize = new Dimension(300, 75);
 	StartVokabeltrainer parentFrame = null;
 	
 	public MainMenu(StartVokabeltrainer parentFrame) {

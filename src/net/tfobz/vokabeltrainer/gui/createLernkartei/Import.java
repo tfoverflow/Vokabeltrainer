@@ -35,22 +35,25 @@ import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
 public class Import extends JDialog {
 
 	private static final long serialVersionUID = -8085120358340962505L;
-	/**
-	 * panels[0-3] Eingabefelder + GrossKleinschreibung Checkbox
-	 * panels[4] Datei auswaehlen
-	 * panels[5] speichern (In Datenbank abspeichern)
-	 */
-	JPanel     panels[]    = new JPanel[6];
-	JTextField textfield[] = new JTextField[6];
-	JLabel     labels[]    = new JLabel[6];
-	String[]   labelText   = { "Beschreibung", "1. Sprache", "2. Sprache", "Groß/Kleinschreibung" };
-
-	JCheckBox grossKleinschreibung = null;
-	JButton importButton = null;
-	JLabel labelSelectedFile = null;
-	ArrayList<Karte> karten = null;
+	
+	// Diese Variablen muessen Global sein, da sie von den ActionListener verwendet werden
+	private JCheckBox grossKleinschreibung = null;
+	private JLabel labelSelectedFile = null;
+	private JButton importButton = null;
+	private ArrayList<Karte> karten = null;
 
 	public Import() {
+		/**
+		 * panels[0-3] Eingabefelder + GrossKleinschreibung Checkbox
+		 * panels[4] Datei auswaehlen
+		 * panels[5] speichern (In Datenbank abspeichern)
+		 */
+		JPanel     panels[]    = new JPanel[6];
+		JTextField textfield[] = new JTextField[6];
+		JLabel     labels[]    = new JLabel[6];
+		String[]   labelText   = { "Beschreibung", "1. Sprache", "2. Sprache", "Groß/Kleinschreibung" };
+
+		
 		this.setTitle("Vokabeltrainer - Importieren");
 		this.setSize(new Dimension(600, 345));
 		this.setResizable(false);

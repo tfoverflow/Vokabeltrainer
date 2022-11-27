@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -18,12 +20,13 @@ import net.tfobz.vokabeltrainer.model.Lernkartei;
 
 public class LernkarteiComponent extends JComponent {
 	private static final long serialVersionUID = -4572167597910292369L;
-	Lernkartei kartei = null;
-	JLabel percent = null;
-	JLabel name = null;
-	JButton playButton = null;
+	
+	private JLabel percent = null;
+	private JLabel name = null;
+	
+	public JButton playButton = null;
+	
 	public LernkarteiComponent(Lernkartei kartei) {
-		this.kartei = kartei;
 		
 		this.setBackground(new Color(0, 255, 0));
 		this.setMinimumSize(new Dimension(300, 200));
@@ -32,7 +35,7 @@ public class LernkarteiComponent extends JComponent {
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
-		percent = new JLabel(getPercent(), SwingConstants.CENTER);
+		percent = new JLabel(getPercent(kartei), SwingConstants.CENTER);
 		percent.setVerticalAlignment(SwingConstants.CENTER);
 		percent.setPreferredSize(new Dimension(300, 100));
 		percent.setBorder(new MatteBorder(0,0,1,0,Color.gray));
@@ -68,7 +71,7 @@ public class LernkarteiComponent extends JComponent {
 		this.add(playButton, c);
 	}
 	
-	private String getPercent() {
+	private String getPercent(Lernkartei kartei) {
 		return "69%";
 	}
 }
