@@ -4,9 +4,11 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+import net.tfobz.vokabeltrainer.gui.Lernansicht.LernAnsicht;
 import net.tfobz.vokabeltrainer.gui.createLernkartei.CreateLernkartei;
 import net.tfobz.vokabeltrainer.gui.mainmenu.MainMenu;
 import net.tfobz.vokabeltrainer.gui.viewLernkarteien.ViewLernkarteien;
+import net.tfobz.vokabeltrainer.model.Lernkartei;
 
 public class StartVokabeltrainer extends JFrame {
 	private static final long serialVersionUID = -8366371103918318718L;
@@ -52,5 +54,12 @@ public class StartVokabeltrainer extends JFrame {
 		this.setTitle("Vokabeltrainer - Lernkarteienübersicht");
 		this.revalidate();
 	 }
+	public void changeToLearnAnsicht(Lernkartei kartei) {
+		System.out.println("Hey HEy 1");
+		this.getContentPane().removeAll();
+		this.add(new LernAnsicht(kartei));
+		this.setTitle("Vokabeltrainer - " + kartei.getBeschreibung());
+		this.revalidate();
+	}
 
 }

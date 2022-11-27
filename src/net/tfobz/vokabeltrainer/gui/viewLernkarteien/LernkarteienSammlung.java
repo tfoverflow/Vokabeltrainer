@@ -2,9 +2,13 @@ package net.tfobz.vokabeltrainer.gui.viewLernkarteien;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+
+import net.tfobz.vokabeltrainer.gui.StartVokabeltrainer;
 import net.tfobz.vokabeltrainer.model.*;
 
 public class LernkarteienSammlung extends JPanel {
@@ -12,11 +16,10 @@ public class LernkarteienSammlung extends JPanel {
 	ArrayList<Lernkartei> sammlung = null;
 
 	public LernkarteienSammlung() {
-		this.setLayout(new FlowLayout(FlowLayout.LEFT, 50,20));
+		this.setLayout(new FlowLayout(FlowLayout.LEFT, 50, 20));
 		this.setLocation(0, 200);
-		this.setMinimumSize(new Dimension(1200,1000));
+		this.setMinimumSize(new Dimension(1200, 1000));
 		reloadLernkarteien();
-		
 	}
 
 	public void reloadLernkarteien() {

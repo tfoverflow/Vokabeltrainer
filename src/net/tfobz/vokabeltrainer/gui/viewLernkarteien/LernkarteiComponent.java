@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
+import net.tfobz.vokabeltrainer.gui.StartVokabeltrainer;
 import net.tfobz.vokabeltrainer.model.Lernkartei;
 
 public class LernkarteiComponent extends JComponent {
@@ -49,6 +50,25 @@ public class LernkarteiComponent extends JComponent {
 		playButton.setPreferredSize(new Dimension(40,40));
 		ImageIcon play_arrow = new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/play_arrow.png");
 		playButton.setIcon(play_arrow);
+		
+		//I'm sorry
+		playButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				// PARENTS PARENTS PARENTS PARENTS PARENTS PARENTS PARENTS PARENTS PARENTS PARENTS PARENTS PARENTS PARENTS PARENTS PARENTS PARENTS PARENTS PARENTS
+				try {
+					// Verifiziere, ob es sich um ein StartVokabeltrainer handelt
+					if (getParent().getParent().getParent().getParent().getParent().getParent().getClass().getSimpleName().equals("StartVokabeltrainer")) {
+						// Durch Trial-And-Error habe ich herausgefunden, dass der/die Ur-Ur-Ur-Ur-Großvater/mutter StartVokabeltrainer ist (6-mal getParent)
+						StartVokabeltrainer startVokabelTrainer = (StartVokabeltrainer) getParent().getParent().getParent().getParent().getParent().getParent();
+						startVokabelTrainer.changeToLearnAnsicht(kartei);
+					}
+				} catch (Exception e1) {/*who cares?*/}
+			}
+		});
+		
 		
 		this.setBorder(BorderFactory.createLineBorder(Color.gray));
 		
