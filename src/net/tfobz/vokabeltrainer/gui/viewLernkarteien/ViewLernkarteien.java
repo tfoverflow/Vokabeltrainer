@@ -1,20 +1,15 @@
 package net.tfobz.vokabeltrainer.gui.viewLernkarteien;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -24,6 +19,8 @@ import net.tfobz.vokabeltrainer.gui.createLernkartei.Import;
 
 public class ViewLernkarteien extends JPanel {
 	
+
+	private static final long serialVersionUID = 5004672701864541712L;
 
 	Import importDialog = null;
 	

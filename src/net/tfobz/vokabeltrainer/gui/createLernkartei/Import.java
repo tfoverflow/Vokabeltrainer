@@ -1,10 +1,8 @@
 package net.tfobz.vokabeltrainer.gui.createLernkartei;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -16,14 +14,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -34,14 +28,13 @@ import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 
-import net.tfobz.vokabeltrainer.model.DatenBankException;
-import net.tfobz.vokabeltrainer.model.Fach;
 import net.tfobz.vokabeltrainer.model.Karte;
 import net.tfobz.vokabeltrainer.model.Lernkartei;
 import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
 
 public class Import extends JDialog {
 
+	private static final long serialVersionUID = -8085120358340962505L;
 	/**
 	 * panels[0-3] Eingabefelder + GrossKleinschreibung Checkbox
 	 * panels[4] Datei auswaehlen

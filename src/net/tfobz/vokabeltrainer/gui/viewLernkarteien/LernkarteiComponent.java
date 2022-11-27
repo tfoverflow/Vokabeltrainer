@@ -17,6 +17,7 @@ import javax.swing.border.MatteBorder;
 import net.tfobz.vokabeltrainer.model.Lernkartei;
 
 public class LernkarteiComponent extends JComponent {
+	private static final long serialVersionUID = -4572167597910292369L;
 	Lernkartei kartei = null;
 	JLabel percent = null;
 	JLabel name = null;

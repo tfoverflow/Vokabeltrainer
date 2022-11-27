@@ -7,10 +7,9 @@ import javax.swing.JFrame;
 import net.tfobz.vokabeltrainer.gui.createLernkartei.CreateLernkartei;
 import net.tfobz.vokabeltrainer.gui.mainmenu.MainMenu;
 import net.tfobz.vokabeltrainer.gui.viewLernkarteien.ViewLernkarteien;
-import net.tfobz.vokabeltrainer.model.Lernkartei;
-import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
 
 public class StartVokabeltrainer extends JFrame {
+	private static final long serialVersionUID = -8366371103918318718L;
 	MainMenu mainMenu = null;
 	CreateLernkartei createLernkartei = null;
 	ViewLernkarteien viewLernkarteien = null;

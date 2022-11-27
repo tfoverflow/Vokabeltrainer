@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import net.tfobz.vokabeltrainer.model.*;
 
 public class LernkarteienSammlung extends JPanel {
+	private static final long serialVersionUID = -6493419412532184569L;
 	ArrayList<Lernkartei> sammlung = null;
 
 	public LernkarteienSammlung() {
