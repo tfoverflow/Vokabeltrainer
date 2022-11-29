@@ -1,5 +1,6 @@
 package net.tfobz.vokabeltrainer.gui;
 
+import java.awt.Container;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -61,5 +62,14 @@ public class StartVokabeltrainer extends JFrame {
 		this.setTitle("Vokabeltrainer - " + kartei.getBeschreibung());
 		this.revalidate();
 	}
+	
+	public static Container getStartVokabelTrainer(Container container) {
+		container=container.getParent();
+		if(container.getClass().getSimpleName().equals("StartVokabeltrainer"))
+			return getStartVokabelTrainer(container);
+		else
+			return getStartVokabelTrainer(container);
+	}
+	
 
 }
