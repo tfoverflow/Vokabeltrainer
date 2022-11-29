@@ -1,6 +1,7 @@
 package net.tfobz.vokabeltrainer.gui.viewLernkarteien;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -68,6 +69,7 @@ public class ViewLernkarteien extends JPanel {
 		titelPanel.add(titel,BorderLayout.CENTER);
 		titelPanel.add(settings, BorderLayout.LINE_END);
 		
+		titelPanel.setBackground(Color.DARK_GRAY);
 		
 		this.add(titelPanel);
 		

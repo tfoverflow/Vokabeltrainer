@@ -2,13 +2,10 @@ package net.tfobz.vokabeltrainer.gui.viewLernkarteien;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import net.tfobz.vokabeltrainer.gui.StartVokabeltrainer;
 import net.tfobz.vokabeltrainer.model.*;
 
 public class LernkarteienSammlung extends JPanel {
