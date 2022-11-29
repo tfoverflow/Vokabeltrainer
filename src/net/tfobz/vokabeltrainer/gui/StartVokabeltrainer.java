@@ -66,7 +66,7 @@ public class StartVokabeltrainer extends JFrame {
 	public static Container getStartVokabelTrainer(Container container) {
 		container=container.getParent();
 		if(container.getClass().getSimpleName().equals("StartVokabeltrainer"))
-			return getStartVokabelTrainer(container);
+			return container;
 		else
 			return getStartVokabelTrainer(container);
 	}
