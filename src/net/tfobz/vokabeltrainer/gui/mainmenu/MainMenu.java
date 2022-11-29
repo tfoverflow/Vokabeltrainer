@@ -29,17 +29,17 @@ public class MainMenu extends JPanel {
 		this.setLayout(new GridBagLayout());
 
 		// Setzt das Theme auf dem vom Benutzer ausgewählten Theme, (z.B. gtk+, windows,
-		// ...)
+		// ...) :3
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
 			// Bugfix: Wenn Gtk Theme benutzt wird, dann wird Background nicht benutzt
-//			if (UIManager.getSystemLookAndFeelClassName() == "com.sun.java.swing.plaf.gtk.GTKLookAndFeel")
+//			if (UIManager.getSystemLookAndFeelClassName() == "com.sun.java.swing.plaf.gtk.GTKLookAndFeel") :3
 				this.setBackground(new Color(56, 56, 56));
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
-		// Defniere Komponenten
+		// Defniere Komponenten :3
 		JLabel titel = new JLabel("Vokabeltrainer");
 		titel.setFont(new Font("Karumbi	", Font.BOLD, 100));
 		titel.setHorizontalAlignment(JLabel.CENTER);
@@ -70,15 +70,15 @@ public class MainMenu extends JPanel {
 		});
 		
 
-		// Platziere Komponenten
-		//Titel
+		// Platziere Komponenten :3
+		//Titel :3
 		c.gridx = 1;
 		c.gridy = 1;
 		c.gridwidth = 3;
 		c.insets = new Insets(0, 0, 100, 0);
 		this.add(titel, c);
 
-		//Erstellen / Ansehen
+		//Erstellen / Ansehen :3
 		c.gridx = 1;
 		c.gridy = 3;
 		c.gridwidth = 1;

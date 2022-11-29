@@ -36,7 +36,7 @@ public class Import extends JDialog {
 
 	private static final long serialVersionUID = -8085120358340962505L;
 	
-	// Diese Variablen muessen Global sein, da sie von den ActionListener verwendet werden
+	// Diese Variablen muessen Global sein, da sie von den ActionListener verwendet werden :3
 	private JCheckBox grossKleinschreibung = null;
 	private JLabel labelSelectedFile = null;
 	private JButton importButton = null;
@@ -44,9 +44,9 @@ public class Import extends JDialog {
 
 	public Import() {
 		/**
-		 * panels[0-3] Eingabefelder + GrossKleinschreibung Checkbox
-		 * panels[4] Datei auswaehlen
-		 * panels[5] speichern (In Datenbank abspeichern)
+		 * panels[0-3] Eingabefelder + GrossKleinschreibung Checkbox :3
+		 * panels[4] Datei auswaehlen :3
+		 * panels[5] speichern (In Datenbank abspeichern) :3
 		 */
 		JPanel     panels[]    = new JPanel[6];
 		JTextField textfield[] = new JTextField[6];
@@ -116,7 +116,7 @@ public class Import extends JDialog {
 				if (fileChooser.showSaveDialog(rootPane) == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = fileChooser.getSelectedFile();
 					try {
-						// Lese alle Karten aus der Datei
+						// Lese alle Karten aus der Datei :3
 						karten = parseLernkartei(selectedFile, grossKleinschreibung.isSelected());
 						labelSelectedFile.setForeground(Color.black);
 						labelSelectedFile.setText(selectedFile.getPath());
@@ -138,7 +138,7 @@ public class Import extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				boolean isAllDataInserted = true;
-				// Kontrolle, ob alle benoetigten Daten eingegeben wurden
+				// Kontrolle, ob alle benoetigten Daten eingegeben wurden :3
 				for(int i = 0; i < 3; i++) {
 					if(textfield[i].getText().trim().isEmpty()) {
 						textfield[i].setBorder(BorderFactory.createLineBorder(Color.red));
@@ -173,18 +173,18 @@ public class Import extends JDialog {
 		c.gridwidth = 10;
 		c.gridheight = 1;
 		
-		//Platziere alle Eingabefelder
+		//Platziere alle Eingabefelder :3
 		for (int i = 0; i < 4; i++) {
 			this.add(panels[i], c);
 			c.gridy++;
 		}
 		
-		//Platziere Importbutton
+		//Platziere Importbutton :3
 		c.gridy = 6;
 		c.insets = new Insets(30, 0, 0, 0);
 		this.add(panels[4], c);
 		
-		//Platziere Savebutton
+		//Platziere Savebutton :3
 		c.gridy = 10;
 		c.insets = new Insets(0, 0, 0, 0);
 		this.add(panels[5], c);
@@ -192,7 +192,7 @@ public class Import extends JDialog {
 	}
 	
 	/**
-	 * Liest alle Karten aus einer Datei
+	 * Liest alle Karten aus einer Datei :3
 	 * @param input
 	 * @param grossKleinschreibung
 	 * @return
@@ -205,17 +205,17 @@ public class Import extends JDialog {
 
 		BufferedReader reader = new BufferedReader(new FileReader(input));
 		String         readLine;
-		// Gelesener String aufgeteilt auf die einzelbenoetigten Argumente
+		// Gelesener String aufgeteilt auf die einzelbenoetigten Argumente :3
 		String[] readLineSplit;
 		while ((readLine = reader.readLine()) != null) {
 			readLineSplit = readLine.split(";");
-			// Kontrolle, ob richtige Formatierung vorhanden ist
+			// Kontrolle, ob richtige Formatierung vorhanden ist :3
 			if (readLineSplit.length < 2 || readLineSplit.length > 3) {
 				reader.close();
 				throw new IllegalArgumentException("Datei muss eine der folgenden Formatierungen haben:\n"
 						+ "Wort1;Wort2\n" + "oder\n" + "Wort1;Wort2;Fachnummer");
 			}
-			// Karte erstellen und hinzufuegen
+			// Karte erstellen und hinzufuegen :3
 			int num = readLineSplit.length == 2 ? 0 : Integer.parseInt(readLineSplit[2].trim());
 			ret.add(new Karte(num, readLineSplit[0], readLineSplit[1], false, grossKleinschreibung));
 		}
@@ -227,7 +227,7 @@ public class Import extends JDialog {
 	/*
 	 * Hab 3 Stunden meines Leben verschwendet, das zu programmieren, 
 	 * bis ich herausgefunden, dass importieren schon in VokabeltrainerDB existiert.
-	 * Ich werde das ganz sicher nicht löschen!
+	 * Ich werde das ganz sicher nicht löschen! ૮ ˶ᵔ ᵕ ᵔ˶ ა
 	 *
 	private void saveLernkartei(ArrayList<Karte> karten,
 			String beschreibung,
