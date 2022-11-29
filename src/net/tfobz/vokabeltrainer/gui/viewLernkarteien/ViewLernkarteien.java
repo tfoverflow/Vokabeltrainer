@@ -33,7 +33,7 @@ public class ViewLernkarteien extends JPanel {
 	
 	LernkarteienSammlung sammlung = null;
 	public ViewLernkarteien() {
-		this.add(topbar);
+//		this.add(topbar);
 		this.addComponentListener(new ComponentAdapter() {
 		public void componentResized(ComponentEvent e) {
         height = (int) getHeight();
