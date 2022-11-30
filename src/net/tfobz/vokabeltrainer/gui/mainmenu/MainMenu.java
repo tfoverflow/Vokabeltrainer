@@ -19,22 +19,19 @@ import net.tfobz.vokabeltrainer.gui.StartVokabeltrainer;
 
 public class MainMenu extends JPanel {
 	private static final long serialVersionUID = -7222145189470706501L;
-	
+
 	private Dimension buttonsize = new Dimension(300, 75);
 	StartVokabeltrainer parentFrame = null;
-	
+
 	public MainMenu(StartVokabeltrainer parentFrame) {
 		this.parentFrame = parentFrame;
-		
+
 		this.setLayout(new GridBagLayout());
 
-		// Setzt das Theme auf dem vom Benutzer ausgewählten Theme, (z.B. gtk+, windows,
-		// ...) :3
+		// Setzt das Theme, wenn möglich, aufs GTK-Theme.
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
-			// Bugfix: Wenn Gtk Theme benutzt wird, dann wird Background nicht benutzt
-//			if (UIManager.getSystemLookAndFeelClassName() == "com.sun.java.swing.plaf.gtk.GTKLookAndFeel") :3
-				this.setBackground(new Color(56, 56, 56));
+			this.setBackground(new Color(56, 56, 56));
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
@@ -44,31 +41,27 @@ public class MainMenu extends JPanel {
 		titel.setFont(new Font("Karumbi	", Font.BOLD, 100));
 		titel.setHorizontalAlignment(JLabel.CENTER);
 
-		
 		JButton createLernkartei = new JButton("Neue Lernkartei");
 		createLernkartei.setPreferredSize(buttonsize);
 		JButton viewLernkartein = new JButton("Lernkarteienübersicht");
 		viewLernkartein.setPreferredSize(buttonsize);
 		GridBagConstraints c = new GridBagConstraints();
-		
-		
-		
+
 		createLernkartei.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				parentFrame.changeToCreateLernkartei();
 			}
 		});
-		
+
 		viewLernkartein.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				parentFrame.changeToViewLernkarteien();
 			}
 		});
-		
 
 		// Platziere Komponenten :3
 		//Titel :3
