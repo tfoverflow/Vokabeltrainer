@@ -60,7 +60,7 @@ public class ViewLernkarteien extends JPanel {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					importDialog = new Import();
+					importDialog = new Import(sammlung);
 					importDialog.setVisible(true);
 				}
 			});

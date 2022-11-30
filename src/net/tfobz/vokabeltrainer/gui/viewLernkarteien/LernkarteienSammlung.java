@@ -20,6 +20,7 @@ public class LernkarteienSammlung extends JPanel {
 	}
 
 	public void reloadLernkarteien() {
+		this.removeAll();
 		sammlung = (ArrayList<Lernkartei>) VokabeltrainerDB.getLernkarteien();
 		sammlung.forEach((kartei) -> {
 			LernkarteiComponent karteiComponent = new LernkarteiComponent(kartei);
@@ -27,6 +28,6 @@ public class LernkarteienSammlung extends JPanel {
 			this.add(karteiComponent);
 		});
 
-		System.out.println(sammlung.toString());
+		this.revalidate();
 	}
 }
