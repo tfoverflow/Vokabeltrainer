@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
@@ -51,16 +52,14 @@ public class LernkarteiComponent extends JComponent {
 		playButton.setPreferredSize(new Dimension(40, 40));
 		ImageIcon play_arrow = new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/play_arrow.png");
 		playButton.setIcon(play_arrow);
-
+		
 		// I'm sorry
 		playButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					((StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer((JButton) e.getSource()))
-							.changeToLearnAnsicht(kartei);
-				} catch (Exception e1) {/* who cares? */}
+				FachAuswahl fachAuswahl = new FachAuswahl(kartei, ((StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer((JButton) e.getSource())));
+				fachAuswahl.setVisible(true);
 			}
 		});
 
