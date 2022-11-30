@@ -1,5 +1,7 @@
 package net.tfobz.vokabeltrainer.gui.topbar;
 
-public class topbar {
+import javax.swing.JPanel;
+
+public class topbar extends JPanel {
 
 }

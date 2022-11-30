@@ -17,13 +17,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import net.tfobz.vokabeltrainer.gui.createLernkartei.Import;
+import net.tfobz.vokabeltrainer.gui.topbar.*;
 
-public class ViewLernkarteien extends JPanel {
-	
+public class ViewLernkarteien extends JPanel {	
 
 	private static final long serialVersionUID = 5004672701864541712L;
 
 	Import importDialog = null;
+	//topbar :3
+	topbar topbar = new topbar();
 	
 	int height = 1080;
 	int width = 1920;
@@ -31,8 +33,9 @@ public class ViewLernkarteien extends JPanel {
 	
 	LernkarteienSammlung sammlung = null;
 	public ViewLernkarteien() {
+//		this.add(topbar);
 		this.addComponentListener(new ComponentAdapter() {
-      public void componentResized(ComponentEvent e) {
+		public void componentResized(ComponentEvent e) {
         height = (int) getHeight();
         width = (int) getWidth();
     }
@@ -52,7 +55,7 @@ public class ViewLernkarteien extends JPanel {
 		
 		titelPanel.setMaximumSize(new Dimension(width-width/2,100));
 		
-	//ActionListener für Buttons
+	//ActionListener für Buttons :3
 			settings.addActionListener(new ActionListener() {
 				
 				@Override

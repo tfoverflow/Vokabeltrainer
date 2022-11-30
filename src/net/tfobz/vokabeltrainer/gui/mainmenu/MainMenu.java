@@ -36,7 +36,7 @@ public class MainMenu extends JPanel {
 				| UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
-		// Defniere Komponenten
+		// Defniere Komponenten :3
 		JLabel titel = new JLabel("Vokabeltrainer");
 		titel.setFont(new Font("Karumbi	", Font.BOLD, 100));
 		titel.setHorizontalAlignment(JLabel.CENTER);
@@ -63,15 +63,15 @@ public class MainMenu extends JPanel {
 			}
 		});
 
-		// Platziere Komponenten
-		// Titel
+		// Platziere Komponenten :3
+		//Titel :3
 		c.gridx = 1;
 		c.gridy = 1;
 		c.gridwidth = 3;
 		c.insets = new Insets(0, 0, 100, 0);
 		this.add(titel, c);
 
-		// Erstellen / Ansehen
+		//Erstellen / Ansehen :3
 		c.gridx = 1;
 		c.gridy = 3;
 		c.gridwidth = 1;

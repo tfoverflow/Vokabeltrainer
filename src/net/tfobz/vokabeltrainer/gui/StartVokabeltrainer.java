@@ -20,8 +20,8 @@ public class StartVokabeltrainer extends JFrame {
 	
 	public StartVokabeltrainer() {
 		
-		this.setSize(1200, 800); // Default Fenstergroesse, wenn Fenster nicht maximiert ist
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH); // Starte Fenster maximiert
+		this.setSize(1200, 800); // Default Fenstergroesse, wenn Fenster nicht maximiert ist :3
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH); // Starte Fenster maximiert :3
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setMinimumSize(new Dimension(800,500));
 		
