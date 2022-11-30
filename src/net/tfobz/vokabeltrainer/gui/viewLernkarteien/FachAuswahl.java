@@ -54,12 +54,18 @@ public class FachAuswahl extends JDialog {
 			beschreibung.setHorizontalAlignment(JLabel.CENTER);
 			newPanel.add(beschreibung);
 			
-			JLabel gelerntAm = new JLabel(fach.getGelerntAmEuropaeischString());
+			JLabel gelerntAm = new JLabel(fach.getGelerntAm() != null ? fach.getGelerntAmEuropaeischString() : "noch nie");
 			gelerntAm.setHorizontalAlignment(JLabel.CENTER);
 			newPanel.add(gelerntAm);
 			
-			LocalDate erinnerung = LocalDate.of(fach.getGelerntAm().getYear(), fach.getGelerntAm().getMonth(), fach.getGelerntAm().getDay());
-			JLabel erinnerungFaellig = new JLabel(erinnerung.plusDays(fach.getErinnerungsIntervall()).toString());
+			JLabel erinnerungFaellig = new JLabel();
+			if(fach.getGelerntAm() != null) {
+				LocalDate erinnerung = LocalDate.of(fach.getGelerntAm().getYear(), fach.getGelerntAm().getMonth(), fach.getGelerntAm().getDay());
+				erinnerungFaellig.setText(erinnerung.plusDays(fach.getErinnerungsIntervall()).toString());
+			} else {
+				erinnerungFaellig.setText("jetzt");
+			}
+			
 			erinnerungFaellig.setHorizontalAlignment(JLabel.CENTER);
 			newPanel.add(erinnerungFaellig);
 			

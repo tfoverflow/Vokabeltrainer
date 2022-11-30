@@ -26,3 +26,5 @@ hs_err_pid*
 *.properties
 *.script
 /net/
+/lernkarteien.lck
+/lernkarteien.tmp/
