@@ -28,7 +28,7 @@ public class StartVokabeltrainer extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setMinimumSize(new Dimension(800,500));
 		
-		
+		this.setIconImage(new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/logo.png").getImage());
 		
 		mainMenu = new MainMenu(this);
 		createLernkartei = new CreateLernkartei();
