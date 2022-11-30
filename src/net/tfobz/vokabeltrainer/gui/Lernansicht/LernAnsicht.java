@@ -9,8 +9,10 @@ import java.awt.ScrollPane;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import net.tfobz.vokabeltrainer.model.Lernkartei;
 
@@ -88,7 +90,12 @@ public class LernAnsicht extends JPanel {
 		
 		
 		//Tabelle
+		DefaultTableModel table = new DefaultTableModel(new String[]{"De", "En", "De", "En"}, 1); 
+		JTable jTable = new JTable(table);
+		
+		
 		ScrollPane scrollpane = new ScrollPane();
+		scrollpane.add(jTable);
 		scrollpane.setPreferredSize(new Dimension(1240, 400));
 		c.weightx = 0.5;
 		c.gridx = 0;
@@ -98,12 +105,6 @@ public class LernAnsicht extends JPanel {
 		c.insets = new Insets(0, 20, 0, 20);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		this.add(scrollpane, c);
-		
-//		c.gridx = 10;
-//		c.gridy = 0;
-//		c.gridwidth = 1;
-//		c.gridheight = 1;
-//		this.add(new JButton(), c);
 	}
 	
 }
