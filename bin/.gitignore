@@ -25,4 +25,14 @@ hs_err_pid*
 #db data
 *.properties
 *.script
+/.classpath
+/.gitignore
+/.project
+/.settings/
+/LICENSE
+/README.md
+/exports/
+/imports/
+/lib/
 /net/
+/test/
