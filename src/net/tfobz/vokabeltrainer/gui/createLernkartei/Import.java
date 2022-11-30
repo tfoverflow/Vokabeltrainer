@@ -56,6 +56,7 @@ public class Import extends JDialog {
 		
 		this.setTitle("Vokabeltrainer - Importieren");
 		this.setSize(new Dimension(600, 345));
+		this.setLocationRelativeTo(null); //Öffne in der Bildschirmmitte :3
 		this.setResizable(false);
 		this.setModal(true);
 

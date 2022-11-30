@@ -29,13 +29,12 @@ import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
 public class FachAuswahl extends JDialog {
 
 	private static final long serialVersionUID = 3567286090716742665L;
-	private StartVokabeltrainer startVokabeltrainer;
 	
 	public FachAuswahl(Lernkartei kartei, StartVokabeltrainer startVokabeltrainer) {
 		this.setModal(true);
 		this.setTitle("Vokabeltrainer - Fachauswahl");
-		this.startVokabeltrainer = startVokabeltrainer;
 		this.setMinimumSize(new Dimension(500, 500));
+		this.setLocationRelativeTo(null); //Öffne in der Bildschirmmitte :3
 		Box box= new Box(BoxLayout.Y_AXIS);
 		
 //		ArrayList<JPanel> panels = new ArrayList<JPanel>();
