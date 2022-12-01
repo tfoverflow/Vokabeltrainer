@@ -154,7 +154,7 @@ public class Import extends JDialog {
 				}
 				
 				if(isAllDataInserted) {
-					Lernkartei kartei = new Lernkartei(textfield[0].getText().trim(), textfield[1].getText().trim(), textfield[2].getText().trim(), false, grossKleinschreibung.isSelected());
+					Lernkartei kartei = new Lernkartei(textfield[0].getText().trim(), textfield[1].getText().trim(), textfield[2].getText().trim(), true, grossKleinschreibung.isSelected());
 					VokabeltrainerDB.hinzufuegenLernkartei(kartei);
 					VokabeltrainerDB.importierenKarten(kartei.getNummer(), labelSelectedFile.getText());
 					setVisible(false);

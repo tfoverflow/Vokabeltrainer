@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
@@ -17,12 +18,16 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import net.tfobz.vokabeltrainer.gui.StartVokabeltrainer;
+import net.tfobz.vokabeltrainer.gui.viewLernkarteien.FachAuswahl;
 import net.tfobz.vokabeltrainer.model.Fach;
 import net.tfobz.vokabeltrainer.model.Karte;
 import net.tfobz.vokabeltrainer.model.Lernkartei;
@@ -39,15 +44,21 @@ public class LernAnsicht extends JPanel {
 	private Dimension buttonSize = new Dimension(250, 60);
 
 	private ArrayList<Karte> karten = new ArrayList<Karte>();
-	private ArrayList<Karte> richtigeKarten = new ArrayList<Karte>();
-	private ArrayList<Karte> falscheKarten = new ArrayList<Karte>();
 	private Karte aktuelleKarte;
+	
+	private DefaultTableModel richtigeKarten, falscheKarten; 
 
 	public LernAnsicht(Lernkartei kartei, Fach fach) {
 		this.setLayout(new GridBagLayout());
 
+		
+		
+		
 		aktuelleKarte = VokabeltrainerDB.getZufaelligeKarte(kartei.getNummer(), fach.getNummer());
-
+		if(aktuelleKarte == null) {
+			keineKarteImFach(kartei);
+		}
+		
 		GridBagConstraints c = new GridBagConstraints();
 		c.weightx = 0;
 		c.weighty = 0.1;
@@ -81,6 +92,13 @@ public class LernAnsicht extends JPanel {
 		wortZwei.setPreferredSize(textFieldSize);
 		wortZwei.setMinimumSize(textFieldSize);
 		wortZwei.requestFocusInWindow();
+		wortZwei.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				wortZwei.setBorder(null);
+			}
+		});
 		c.gridx = 4;
 		c.gridwidth = 4;
 		this.add(wortZwei, c);
@@ -94,7 +112,7 @@ public class LernAnsicht extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (aktuelleKarte.getRichtig(wortZwei.getText().trim())) {
+				if (aktuelleKarte.getRichtig(wortZwei.getText())) {
 					VokabeltrainerDB.setKarteRichtig(aktuelleKarte);
 					//TODO Belonung hinzufügen
 					
@@ -110,6 +128,14 @@ public class LernAnsicht extends JPanel {
 							new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/info.png"));
 					//@formatter:on
 				}
+				
+				aktuelleKarte = VokabeltrainerDB.getZufaelligeKarte(kartei.getNummer(), fach.getNummer());
+				if(aktuelleKarte == null)
+					keineKarteImFach(kartei);
+					
+				wortEins.setText(aktuelleKarte.getWortEins());
+				wortZwei.setText("");
+				wortZwei.setBorder(null);
 			}
 		});
 		
@@ -129,13 +155,36 @@ public class LernAnsicht extends JPanel {
 		
 		
 		//Tabelle
-		DefaultTableModel table = new DefaultTableModel(new String[]{"De", "En", "De", "En"}, 1); 
-		JTable jTable = new JTable(table);
+		richtigeKarten = new DefaultTableModel(new String[]{kartei.getWortEinsBeschreibung(),kartei.getWortZweiBeschreibung()}, 1);
+		falscheKarten = new DefaultTableModel(new String[]{kartei.getWortEinsBeschreibung(),kartei.getWortZweiBeschreibung()}, 1);
+		JTable jTableRichtig = new JTable(richtigeKarten);
+		jTableRichtig.setBackground(new Color(0, 255, 0, 100));
+		jTableRichtig.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		jTableRichtig.setPreferredSize(new Dimension(640, 400));
+		JTable jTableFalsch = new JTable(falscheKarten);
+		jTableFalsch.setBackground(new Color(255, 0, 0, 100));
+		jTableFalsch.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		jTableFalsch.setPreferredSize(new Dimension(640, 400));
 		
+		JPanel tables = new JPanel();
+		JPanel panelTableRichtig = new JPanel();
+		panelTableRichtig.add(jTableRichtig);
+		panelTableRichtig.setBorder(BorderFactory.createTitledBorder (BorderFactory.createEtchedBorder (),
+                "Richtig beantwortet",
+                TitledBorder.CENTER,
+                TitledBorder.TOP));
+		tables.add(panelTableRichtig);
+		JPanel panelTableFalsch = new JPanel();
+		panelTableFalsch.add(jTableFalsch);
+		panelTableFalsch.setBorder(BorderFactory.createTitledBorder (BorderFactory.createEtchedBorder (),
+                "Falsch beantwortet",
+                TitledBorder.CENTER,
+                TitledBorder.TOP));
+		tables.add(panelTableFalsch);
 		
-		ScrollPane scrollpane = new ScrollPane();
-		scrollpane.add(jTable);
-		scrollpane.setPreferredSize(new Dimension(1240, 400));
+		JScrollPane scrollpane = new JScrollPane(tables);
+		scrollpane.setBorder(BorderFactory.createLineBorder(Color.red));
+		scrollpane.setPreferredSize(new Dimension(1000, 400));
 		c.weightx = 0.5;
 		c.gridx = 0;
 		c.gridy = 3;
@@ -144,6 +193,14 @@ public class LernAnsicht extends JPanel {
 		c.insets = new Insets(0, 20, 0, 20);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		this.add(scrollpane, c);
+	}
+	
+	private void keineKarteImFach(Lernkartei kartei) {
+		JOptionPane.showMessageDialog(this, "Sie haben alle Karten in diesem Fach behandelt.");
+		StartVokabeltrainer startVokabeltrainer = (StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer(this);
+		startVokabeltrainer.changeToViewLernkarteien();
+		FachAuswahl fachAuswahl = new FachAuswahl(kartei, startVokabeltrainer);
+		fachAuswahl.setVisible(true);
 	}
 	
 }
