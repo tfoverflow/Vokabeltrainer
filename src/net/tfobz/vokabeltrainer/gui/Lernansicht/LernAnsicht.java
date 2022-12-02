@@ -26,6 +26,8 @@ import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import org.hsqldb.Table;
+
 import net.tfobz.vokabeltrainer.gui.StartVokabeltrainer;
 import net.tfobz.vokabeltrainer.gui.viewLernkarteien.FachAuswahl;
 import net.tfobz.vokabeltrainer.model.Fach;
@@ -115,10 +117,12 @@ public class LernAnsicht extends JPanel {
 				if (aktuelleKarte.getRichtig(wortZwei.getText())) {
 					VokabeltrainerDB.setKarteRichtig(aktuelleKarte);
 					//TODO Belonung hinzufügen
-					
+					richtigeKarten.addRow(new Object[] {aktuelleKarte.getWortEins(), aktuelleKarte.getWortZwei()});
 				} else {
 					//@formatter:off
 					VokabeltrainerDB.setKarteFalsch(aktuelleKarte);
+					
+					falscheKarten.addRow(new Object[] {aktuelleKarte.getWortEins(), aktuelleKarte.getWortZwei()});
 					
 					wortZwei.setBorder(BorderFactory.createLineBorder(Color.red));
 					JOptionPane.showMessageDialog(null, 
@@ -155,8 +159,8 @@ public class LernAnsicht extends JPanel {
 		
 		
 		//Tabelle
-		richtigeKarten = new DefaultTableModel(new String[]{kartei.getWortEinsBeschreibung(),kartei.getWortZweiBeschreibung()}, 1);
-		falscheKarten = new DefaultTableModel(new String[]{kartei.getWortEinsBeschreibung(),kartei.getWortZweiBeschreibung()}, 1);
+		richtigeKarten = new DefaultTableModel(new String[]{kartei.getWortEinsBeschreibung(),kartei.getWortZweiBeschreibung()}, 0);
+		falscheKarten = new DefaultTableModel(new String[]{kartei.getWortEinsBeschreibung(),kartei.getWortZweiBeschreibung()}, 0);
 		JTable jTableRichtig = new JTable(richtigeKarten);
 		jTableRichtig.setBackground(new Color(0, 255, 0, 100));
 		jTableRichtig.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
