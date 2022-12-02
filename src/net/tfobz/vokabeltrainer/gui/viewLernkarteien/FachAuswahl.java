@@ -118,6 +118,7 @@ public class FachAuswahl extends JDialog {
 			erinnerungFaellig.setHorizontalAlignment(JLabel.CENTER);
 			newPanel.add(erinnerungFaellig);
 			
+			//TODO Very performance-inefficient! Needs Improvements
 			JLabel nKarten = new JLabel(VokabeltrainerDB.getKarten(fach.getNummer()).size() + " Karten");
 			nKarten.setHorizontalAlignment(JLabel.CENTER);
 			newPanel.add(nKarten);
