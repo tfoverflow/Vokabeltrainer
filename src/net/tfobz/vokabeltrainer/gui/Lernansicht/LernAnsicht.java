@@ -114,32 +114,34 @@ public class LernAnsicht extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (aktuelleKarte.getRichtig(wortZwei.getText())) {
-					VokabeltrainerDB.setKarteRichtig(aktuelleKarte);
-					//TODO Belonung hinzufügen
-					richtigeKarten.addRow(new Object[] {aktuelleKarte.getWortEins(), aktuelleKarte.getWortZwei()});
-				} else {
-					//@formatter:off
-					VokabeltrainerDB.setKarteFalsch(aktuelleKarte);
+				if(!wortZwei.getText().trim().isEmpty()) {
+					if (aktuelleKarte.getRichtig(wortZwei.getText())) {
+						VokabeltrainerDB.setKarteRichtig(aktuelleKarte);
+						//TODO Belonung hinzufügen
+						richtigeKarten.addRow(new Object[] {aktuelleKarte.getWortEins(), aktuelleKarte.getWortZwei()});
+					} else {
+						//@formatter:off
+						VokabeltrainerDB.setKarteFalsch(aktuelleKarte);
+						
+						falscheKarten.addRow(new Object[] {aktuelleKarte.getWortEins(), aktuelleKarte.getWortZwei()});
+						
+						wortZwei.setBorder(BorderFactory.createLineBorder(Color.red));
+						JOptionPane.showMessageDialog(null, 
+								"Wort wäre " + aktuelleKarte.getWortZwei() + " gewesen.", 
+								"Falsche Eingabe", 
+								JOptionPane.INFORMATION_MESSAGE, 
+								new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/info.png"));
+						//@formatter:on
+					}
 					
-					falscheKarten.addRow(new Object[] {aktuelleKarte.getWortEins(), aktuelleKarte.getWortZwei()});
-					
-					wortZwei.setBorder(BorderFactory.createLineBorder(Color.red));
-					JOptionPane.showMessageDialog(null, 
-							"Wort wäre " + aktuelleKarte.getWortZwei() + " gewesen.", 
-							"Falsche Eingabe", 
-							JOptionPane.INFORMATION_MESSAGE, 
-							new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/info.png"));
-					//@formatter:on
+					aktuelleKarte = VokabeltrainerDB.getZufaelligeKarte(kartei.getNummer(), fach.getNummer());
+					if(aktuelleKarte == null)
+						keineKarteImFach(kartei);
+						
+					wortEins.setText(aktuelleKarte.getWortEins());
+					wortZwei.setText("");
+					wortZwei.setBorder(null);
 				}
-				
-				aktuelleKarte = VokabeltrainerDB.getZufaelligeKarte(kartei.getNummer(), fach.getNummer());
-				if(aktuelleKarte == null)
-					keineKarteImFach(kartei);
-					
-				wortEins.setText(aktuelleKarte.getWortEins());
-				wortZwei.setText("");
-				wortZwei.setBorder(null);
 			}
 		});
 		
@@ -152,6 +154,24 @@ public class LernAnsicht extends JPanel {
 		JButton aufloesen = new JButton("Auflösen");
 		aufloesen.setPreferredSize(buttonSize);
 		aufloesen.setMinimumSize(buttonSize);
+		aufloesen.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, 
+						"Wort wäre " + aktuelleKarte.getWortZwei() + " gewesen.", 
+						"Auflösung", 
+						JOptionPane.INFORMATION_MESSAGE, 
+						new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/info.png"));
+				aktuelleKarte = VokabeltrainerDB.getZufaelligeKarte(kartei.getNummer(), fach.getNummer());
+				if(aktuelleKarte == null)
+					keineKarteImFach(kartei);
+					
+				wortEins.setText(aktuelleKarte.getWortEins());
+				wortZwei.setText("");
+				wortZwei.setBorder(null);
+			}
+		});
 		
 		c.gridx = 4;
 		c.gridwidth = 2;
