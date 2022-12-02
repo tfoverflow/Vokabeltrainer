@@ -35,6 +35,7 @@ public class FachAuswahl extends JDialog {
 		this.setTitle("Vokabeltrainer - Fachauswahl");
 		this.setMinimumSize(new Dimension(500, 500));
 		this.setLocationRelativeTo(null); //Öffne in der Bildschirmmitte :3
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		Box box= new Box(BoxLayout.Y_AXIS);
 		
 //		ArrayList<JPanel> panels = new ArrayList<JPanel>();

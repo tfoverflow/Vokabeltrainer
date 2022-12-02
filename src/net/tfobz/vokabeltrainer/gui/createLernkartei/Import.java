@@ -59,6 +59,7 @@ public class Import extends JDialog {
 		this.setLocationRelativeTo(null); //Öffne in der Bildschirmmitte :3
 		this.setResizable(false);
 		this.setModal(true);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
 		this.getContentPane().setLayout(new GridBagLayout());
 
