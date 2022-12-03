@@ -10,9 +10,9 @@ public class topbar extends JPanel {
 	
 	public topbar(int w) {
 		
-//		this.setPreferredSize(new Dimension(1092,108));
-		this.setBackground(Color.DARK_GRAY);
-		this.setBorder(BorderFactory.createLineBorder(Color.CYAN));
+//		this.setMinimumSize(new Dimension(1920,100));
+//		this.setBackground(Color.DARK_GRAY);
+		this.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, Color.GRAY));
 	}
 
 }
