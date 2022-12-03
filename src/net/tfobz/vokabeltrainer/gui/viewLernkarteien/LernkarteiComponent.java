@@ -44,7 +44,7 @@ public class LernkarteiComponent extends JComponent {
 		if(kartei.isErinnerungfaellig())
 			this.setBorder(BorderFactory.createLineBorder(Color.red));
 		else*/
-			this.setBorder(BorderFactory.createLineBorder(Color.gray));
+			this.setBorder(BorderFactory.createLineBorder(Color.gray, 2));
 		 
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -52,14 +52,17 @@ public class LernkarteiComponent extends JComponent {
 		percent = new JLabel(getPercent(kartei), SwingConstants.CENTER);
 		percent.setVerticalAlignment(SwingConstants.CENTER);
 		percent.setPreferredSize(new Dimension(300, 100));
-		percent.setBorder(new MatteBorder(0, 0, 1, 0, Color.gray));
+		percent.setBorder(new MatteBorder(0, 0, 2, 0, Color.gray));
 		percent.setFont(new Font(percent.getFont().getFontName(), Font.PLAIN, 25));
 
 		name = new JLabel(kartei.getBeschreibung());
 		name.setPreferredSize(new Dimension(250, 50));
-		name.setBorder(new MatteBorder(0, 0, 0, 1, Color.gray));
+		name.setBorder(new MatteBorder(0, 0, 0, 2, Color.gray));
 		name.setHorizontalAlignment(JLabel.CENTER);
 
+		JButton exportButton = new JButton(new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/download.png"));
+		exportButton.setPreferredSize(new Dimension(40, 40));
+		
 		playButton = new JButton();
 		playButton.setPreferredSize(new Dimension(40, 40));
 		ImageIcon play_arrow = new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/play_arrow.png");
@@ -79,9 +82,15 @@ public class LernkarteiComponent extends JComponent {
 
 		c.gridx = 0;
 		c.gridy = 0;
-		c.gridwidth = 10;
+		c.gridwidth = 7;
 		c.gridheight = 7;
 		this.add(percent, c);
+		
+		c.gridx = 7;
+		c.gridy = 3;
+		c.gridwidth = 2;
+		c.gridheight = 2;
+		this.add(exportButton, c);
 
 		c.gridx = 0;
 		c.gridy = 7;
