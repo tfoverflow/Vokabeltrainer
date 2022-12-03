@@ -40,10 +40,10 @@ public class StartVokabeltrainer extends JFrame {
 		this.setIconImage(new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/logo.png").getImage());
 		
 		mainMenu = new MainMenu(this);
+		content = new JPanel();
 		this.changeToMainMenu();
 		createLernkartei = new CreateLernkartei();
 		viewLernkarteien = new ViewLernkarteien();
-		content = new JPanel();
 //		content.setPreferredSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		
 		this.changeToMainMenu();
@@ -81,7 +81,7 @@ public class StartVokabeltrainer extends JFrame {
 		
 	}
 	public void changeToMainMenu() {
-		this.content.removeAll();
+		content.removeAll();
 		content.add(mainMenu);
 		this.setTitle("Vokabeltrainer - MainMenu");
 		content.repaint();
