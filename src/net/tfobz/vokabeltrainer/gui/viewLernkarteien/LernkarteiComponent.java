@@ -9,11 +9,13 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -21,6 +23,7 @@ import javax.swing.border.MatteBorder;
 
 import net.tfobz.vokabeltrainer.gui.StartVokabeltrainer;
 import net.tfobz.vokabeltrainer.model.Lernkartei;
+import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
 
 public class LernkarteiComponent extends JComponent {
 	private static final long serialVersionUID = -4572167597910292369L;
@@ -65,8 +68,9 @@ public class LernkarteiComponent extends JComponent {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FachAuswahl fachAuswahl = new FachAuswahl(kartei, ((StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer((JButton) e.getSource())));
-				fachAuswahl.setVisible(true);
+//				FachAuswahl fachAuswahl = new FachAuswahl(kartei, ((StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer((JButton) e.getSource())));
+//				fachAuswahl.setVisible(true);
+				export(kartei);
 			}
 		});
 
@@ -92,5 +96,43 @@ public class LernkarteiComponent extends JComponent {
 
 	private String getPercent(Lernkartei kartei) {
 		return "69%";
+	}
+	
+	private void export(Lernkartei kartei) {
+		File path;
+		Boolean mitFaechern;
+		
+		JFileChooser fileChooser = new JFileChooser();
+		if(JFileChooser.APPROVE_OPTION == fileChooser.showSaveDialog(this))
+			path = fileChooser.getSelectedFile();
+		else
+			return;
+		
+		switch (JOptionPane.showConfirmDialog(this, "Soll der Fortschritt gespeichert bleiben?")) {
+			case JOptionPane.YES_OPTION: {
+				mitFaechern = true;
+			break;
+		}
+			case JOptionPane.NO_OPTION: {
+				mitFaechern = false;
+			break;
+		}
+		default:
+			return;
+		}
+		
+		switch (VokabeltrainerDB.exportierenKarten(kartei.getNummer(), path.getAbsolutePath(), mitFaechern)) {
+		case -1: {
+			JOptionPane.showMessageDialog(this, "Es ist ein Datenbankfehler oder Schreibfehler in Datei aufgetreten", "Fehler", JOptionPane.ERROR_MESSAGE);
+			break;
+		}
+		case -3: {
+			//Hier sollte NIEMAND NIEMALS JEMALS IRGENDWIE HINKOMMEN
+			JOptionPane.showMessageDialog(this, "Lernkartei existiert nicht", "Fehler", JOptionPane.ERROR_MESSAGE);
+			break;
+		}
+		default:
+			
+		}
 	}
 }

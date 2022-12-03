@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -19,6 +20,7 @@ import javax.swing.JPanel;
 import net.tfobz.vokabeltrainer.gui.createLernkartei.Import;
 import net.tfobz.vokabeltrainer.gui.topbar.*;
 import net.tfobz.vokabeltrainer.model.Lernkartei;
+import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
 
 public class ViewLernkarteien extends JPanel {	
 
@@ -32,6 +34,7 @@ public class ViewLernkarteien extends JPanel {
 	
 	LernkarteienSammlung sammlung = null;
 	public ViewLernkarteien() {
+		System.out.println(VokabeltrainerDB.getLernkarteien().toString());
 		this.addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
 				height = (int) getHeight();
@@ -58,7 +61,7 @@ public class ViewLernkarteien extends JPanel {
 		sammlung = new LernkarteienSammlung();
 //		sammlung.setSize(height,width);
 		sammlung.setLocation(0,100);
-		
+		sammlung.setBorder(BorderFactory.createLineBorder(Color.red));
 		this.add(sammlung); 
 //		sammlung.setBackground(new Color(255, 0, 0));
 	}
