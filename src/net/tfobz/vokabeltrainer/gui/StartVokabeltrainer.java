@@ -2,13 +2,21 @@ package net.tfobz.vokabeltrainer.gui;
 
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import com.formdev.flatlaf.FlatDarkLaf;
 
 import net.tfobz.vokabeltrainer.gui.Lernansicht.LernAnsicht;
 import net.tfobz.vokabeltrainer.gui.createLernkartei.CreateLernkartei;
 import net.tfobz.vokabeltrainer.gui.mainmenu.MainMenu;
+import net.tfobz.vokabeltrainer.gui.topbar.topbar;
 import net.tfobz.vokabeltrainer.gui.viewLernkarteien.ViewLernkarteien;
 import net.tfobz.vokabeltrainer.model.Fach;
 import net.tfobz.vokabeltrainer.model.Lernkartei;
@@ -19,8 +27,10 @@ public class StartVokabeltrainer extends JFrame {
 	private MainMenu mainMenu = null;
 	private CreateLernkartei createLernkartei = null;
 	private ViewLernkarteien viewLernkarteien = null;
+	private JPanel content = null;
 	
 	public StartVokabeltrainer() {
+		this.setLayout(new GridBagLayout());
 		this.setSize(1200, 800); // Default Fenstergroesse, wenn Fenster nicht maximiert ist :3
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); // Starte Fenster maximiert :3
 		this.setLocationRelativeTo(null); //Öffne in der Bildschirmmitte :3
@@ -33,37 +43,66 @@ public class StartVokabeltrainer extends JFrame {
 		this.changeToMainMenu();
 		createLernkartei = new CreateLernkartei();
 		viewLernkarteien = new ViewLernkarteien();
+		content = new JPanel();
+//		content.setPreferredSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+		
+		this.changeToMainMenu();
+		
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.BOTH;
+		c.anchor = GridBagConstraints.PAGE_START;
+		c.weightx = 1;
+//		c.weighty = 0.1;
+		c.gridx = 0;
+		c.gridy = 0;
+		c.gridwidth = 100;
+		c.gridheight = 1;
+		topbar topbar = new topbar(1920);
+		topbar.setMaximumSize(new Dimension(1920, 75));
+		topbar.setMinimumSize(new Dimension(1920, 75));
+		topbar.setPreferredSize(new Dimension(1920, 75));
+		this.add(topbar, c);
+		
+		c.anchor = GridBagConstraints.CENTER;
+
+		c.weighty = 0.9;
+		c.gridx = 0;
+		c.gridy = 10;
+		c.gridwidth = 100;
+		c.gridheight = 90;
+		this.add(content, c);
 	}
 	public static void main(String[] args) {
 //		MainMenu mainMenu = new MainMenu();
 //		mainMenu.setVisible(true);
+		FlatDarkLaf.setup();
 		StartVokabeltrainer f = new StartVokabeltrainer();
 		f.setVisible(true);
 		
 	}
 	public void changeToMainMenu() {
-		this.getContentPane().removeAll();
-		this.add(mainMenu);
+		this.content.removeAll();
+		content.add(mainMenu);
 		this.setTitle("Vokabeltrainer - MainMenu");
-		this.revalidate();
+		content.repaint();
 	 }
 	public void changeToCreateLernkartei() {
-		this.getContentPane().removeAll();
-		this.add(createLernkartei);
+		this.content.removeAll();
+		content.add(createLernkartei);
 		this.setTitle("Vokabeltrainer - Lernkartei erstellen");
-		this.revalidate();
+		content.repaint();
 	 }
 	public void changeToViewLernkarteien() {
-		this.getContentPane().removeAll();
-		this.add(viewLernkarteien);
+		this.content.removeAll();
+		content.add(viewLernkarteien);
 		this.setTitle("Vokabeltrainer - Lernkarteienübersicht");
-		this.revalidate();
+		content.repaint();
 	 }
 	public void changeToLearnAnsicht(Lernkartei kartei, Fach fach) {
-		this.getContentPane().removeAll();
-		this.add(new LernAnsicht(kartei, fach));
+		this.content.removeAll();
+		content.add(new LernAnsicht(kartei, fach));
 		this.setTitle("Vokabeltrainer - " + kartei.getBeschreibung());
-		this.revalidate();
+		content.repaint();
 	}
 	
 	public static Container getStartVokabelTrainer(Container container) {
