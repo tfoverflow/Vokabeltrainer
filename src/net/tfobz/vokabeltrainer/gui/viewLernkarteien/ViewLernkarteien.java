@@ -24,8 +24,6 @@ public class ViewLernkarteien extends JPanel {
 	private static final long serialVersionUID = 5004672701864541712L;
 
 	Import importDialog = null;
-	//topbar :3
-	topbar topbar = new topbar();
 	
 	int height = 1080;
 	int width = 1920;
@@ -33,7 +31,6 @@ public class ViewLernkarteien extends JPanel {
 	
 	LernkarteienSammlung sammlung = null;
 	public ViewLernkarteien() {
-//		this.add(topbar);
 		this.addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
 				height = (int) getHeight();
@@ -42,18 +39,18 @@ public class ViewLernkarteien extends JPanel {
 		});
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		JPanel titelPanel = new JPanel();
-		titelPanel.setLayout(new BorderLayout());
-		
-		this.add(Box.createRigidArea(new Dimension(0,30)));
-		JLabel titel = new JLabel("Lernkarteienübersicht");
+//		JPanel titelPanel = new JPanel();
+//		titelPanel.setLayout(new BorderLayout());
+//		
+//		this.add(Box.createRigidArea(new Dimension(0,30)));
+//		JLabel titel = new JLabel("Lernkarteienübersicht");
 		JButton settings = new JButton();
 		settings.setPreferredSize(new Dimension(50, 50));
-		titel.setMaximumSize(new Dimension(200,50));
-		titel.setHorizontalAlignment(JLabel.CENTER);
+//		titel.setMaximumSize(new Dimension(200,50));
+//		titel.setHorizontalAlignment(JLabel.CENTER);
 		settings.setIcon(upload);
 		
-		titelPanel.setMaximumSize(new Dimension(width-width/2,100));
+//		titelPanel.setMaximumSize(new Dimension(width-width/2,100));
 		
 	//ActionListener für Buttons :3
 			settings.addActionListener(new ActionListener() {
@@ -66,20 +63,20 @@ public class ViewLernkarteien extends JPanel {
 			});
 			
 			
-		titel.setAlignmentX(CENTER_ALIGNMENT);
-		titel.setFont(new Font(titel.getFont().getFontName(),Font.PLAIN, 40));
+//		titel.setAlignmentX(CENTER_ALIGNMENT);
+//		titel.setFont(new Font(titel.getFont().getFontName(),Font.PLAIN, 40));
+//		
+//		titelPanel.add(titel,BorderLayout.CENTER);
+//		titelPanel.add(settings, BorderLayout.LINE_END);
+//		
+//		titelPanel.setBackground(Color.DARK_GRAY);
 		
-		titelPanel.add(titel,BorderLayout.CENTER);
-		titelPanel.add(settings, BorderLayout.LINE_END);
-		
-		titelPanel.setBackground(Color.DARK_GRAY);
-		
-		this.add(titelPanel);
+//		this.add(titelPanel);
 		
 		this.add(Box.createRigidArea(new Dimension(0,30)));
 		
 		sammlung = new LernkarteienSammlung();
-		sammlung.setSize(1920,200);
+//		sammlung.setSize(height,width);
 		sammlung.setLocation(0,100);
 		
 		this.add(sammlung); 

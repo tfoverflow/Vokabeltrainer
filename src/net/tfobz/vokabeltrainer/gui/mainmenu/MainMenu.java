@@ -16,7 +16,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import net.tfobz.vokabeltrainer.gui.StartVokabeltrainer;
-
+import com.formdev.flatlaf.*;
 public class MainMenu extends JPanel {
 	private static final long serialVersionUID = -7222145189470706501L;
 
@@ -28,13 +28,22 @@ public class MainMenu extends JPanel {
 		this.setLayout(new GridBagLayout());
 
 		// Setzt das Theme, wenn möglich, aufs GTK-Theme.
-		try {
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
-			this.setBackground(new Color(56, 56, 56));
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-				| UnsupportedLookAndFeelException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+//			this.setBackground(new Color(56, 56, 56));
+//		} catch (ClassNotFoundException e) {
+
+			try {
+				UIManager.setLookAndFeel("com.formdev.flatlaf");
+			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+					| UnsupportedLookAndFeelException e1) {
+				e1.printStackTrace();
+			}
+//		} catch (InstantiationException | IllegalAccessException
+//				| UnsupportedLookAndFeelException e) {
+//			e.printStackTrace();
+//		}
+		   
 		// Defniere Komponenten :3
 		JLabel titel = new JLabel("Vokabeltrainer");
 		titel.setFont(new Font("Karumbi	", Font.BOLD, 100));
