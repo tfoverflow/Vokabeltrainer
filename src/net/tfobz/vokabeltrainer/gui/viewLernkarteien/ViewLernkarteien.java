@@ -39,19 +39,9 @@ public class ViewLernkarteien extends JPanel {
 			}
 		});
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
-//		JPanel titelPanel = new JPanel();
-//		titelPanel.setLayout(new BorderLayout());
-//		
-//		this.add(Box.createRigidArea(new Dimension(0,30)));
-//		JLabel titel = new JLabel("Lernkarteienübersicht");
 		JButton settings = new JButton();
-		settings.setPreferredSize(new Dimension(50, 50));
-//		titel.setMaximumSize(new Dimension(200,50));
-//		titel.setHorizontalAlignment(JLabel.CENTER);
+		settings.setPreferredSize(new Dimension(50, 50));;
 		settings.setIcon(upload);
-		
-//		titelPanel.setMaximumSize(new Dimension(width-width/2,100));
 		
 	//ActionListener für Buttons :3
 			settings.addActionListener(new ActionListener() {
@@ -62,17 +52,6 @@ public class ViewLernkarteien extends JPanel {
 					importDialog.setVisible(true);
 				}
 			});
-			
-			
-//		titel.setAlignmentX(CENTER_ALIGNMENT);
-//		titel.setFont(new Font(titel.getFont().getFontName(),Font.PLAIN, 40));
-//		
-//		titelPanel.add(titel,BorderLayout.CENTER);
-//		titelPanel.add(settings, BorderLayout.LINE_END);
-//		
-//		titelPanel.setBackground(Color.DARK_GRAY);
-		
-//		this.add(titelPanel);
 		
 		this.add(Box.createRigidArea(new Dimension(0,30)));
 		
