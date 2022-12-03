@@ -10,6 +10,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.formdev.flatlaf.FlatDarkLaf;
+
 import net.tfobz.vokabeltrainer.gui.Lernansicht.LernAnsicht;
 import net.tfobz.vokabeltrainer.gui.createLernkartei.CreateLernkartei;
 import net.tfobz.vokabeltrainer.gui.mainmenu.MainMenu;
@@ -67,6 +69,7 @@ public class StartVokabeltrainer extends JFrame {
 	public static void main(String[] args) {
 //		MainMenu mainMenu = new MainMenu();
 //		mainMenu.setVisible(true);
+		FlatDarkLaf.setup();
 		StartVokabeltrainer f = new StartVokabeltrainer();
 		f.setVisible(true);
 		
