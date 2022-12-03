@@ -28,9 +28,8 @@ public class ViewLernkarteien extends JPanel {
 	
 	int height = 1080;
 	int width = 1920;
-	ImageIcon upload = new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/upload.png");
 	
-	LernkarteienSammlung sammlung = null;
+	private LernkarteienSammlung sammlung = null;
 	public ViewLernkarteien() {
 		this.addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
@@ -39,19 +38,16 @@ public class ViewLernkarteien extends JPanel {
 			}
 		});
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		JButton settings = new JButton();
-		settings.setPreferredSize(new Dimension(50, 50));;
-		settings.setIcon(upload);
-		
+	
 	//ActionListener für Buttons :3
-			settings.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					importDialog = new Import(sammlung);
-					importDialog.setVisible(true);
-				}
-			});
+//			settings.addActionListener(new ActionListener() {
+//				
+//				@Override
+//				public void actionPerformed(ActionEvent e) {
+//					importDialog = new Import(sammlung);
+//					importDialog.setVisible(true);
+//				}
+//			});
 		
 		this.add(Box.createRigidArea(new Dimension(0,30)));
 		
@@ -63,7 +59,16 @@ public class ViewLernkarteien extends JPanel {
 //		sammlung.setBackground(new Color(255, 0, 0));
 	}
 	
+	public LernkarteienSammlung getSammlung() {
+		return sammlung;
+	}
+	
 	public void export(Lernkartei kartei) {
 		
+	}
+	
+	public void test(ActionEvent e) {
+//		importDialog = new Import(sammlung);
+		importDialog.setVisible(true);
 	}
 }

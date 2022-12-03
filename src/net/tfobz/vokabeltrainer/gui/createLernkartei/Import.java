@@ -1,6 +1,7 @@
 package net.tfobz.vokabeltrainer.gui.createLernkartei;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -27,6 +28,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import net.tfobz.vokabeltrainer.gui.StartVokabeltrainer;
 import net.tfobz.vokabeltrainer.gui.viewLernkarteien.LernkarteienSammlung;
 import net.tfobz.vokabeltrainer.model.Karte;
 import net.tfobz.vokabeltrainer.model.Lernkartei;
@@ -42,7 +44,7 @@ public class Import extends JDialog {
 	private JButton importButton = null;
 	private ArrayList<Karte> karten = null;
 
-	public Import(LernkarteienSammlung sammlung) {
+	public Import(Container parent) {
 		/**
 		 * panels[0-3] Eingabefelder + GrossKleinschreibung Checkbox :3
 		 * panels[4] Datei auswaehlen :3
@@ -159,7 +161,8 @@ public class Import extends JDialog {
 					VokabeltrainerDB.hinzufuegenLernkartei(kartei);
 					VokabeltrainerDB.importierenKarten(kartei.getNummer(), labelSelectedFile.getText());
 					setVisible(false);
-					sammlung.reloadLernkarteien();
+					// I'm sorry :'c
+					((StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer(parent)).getViewLernkarteien().getSammlung().reloadLernkarteien();
 				}
 			}
 		});

@@ -95,6 +95,7 @@ public class StartVokabeltrainer extends JFrame {
 		content.add(mainMenu);
 		this.setTitle("Vokabeltrainer - MainMenu");
 		topbar.setTitel("Vokabeltrainer");
+		topbar.setImpFalse();
 		content.repaint();
 	 }
 	public void changeToCreateLernkartei() {
@@ -102,6 +103,7 @@ public class StartVokabeltrainer extends JFrame {
 		content.add(createLernkartei);
 		this.setTitle("Vokabeltrainer - Lernkartei erstellen");
 		topbar.setTitel("Lernkartei erstellen");
+		topbar.setImpFalse();
 		content.repaint();
 	 }
 	public void changeToViewLernkarteien() {
@@ -109,6 +111,7 @@ public class StartVokabeltrainer extends JFrame {
 		content.add(viewLernkarteien);
 		this.setTitle("Vokabeltrainer - Lernkarteienübersicht");
 		topbar.setTitel("Lernkarteien");
+		topbar.setImpTrue();
 		content.repaint();
 	 }
 	public void changeToLearnAnsicht(Lernkartei kartei, Fach fach) {
@@ -116,6 +119,7 @@ public class StartVokabeltrainer extends JFrame {
 		content.add(new LernAnsicht(kartei, fach));
 		this.setTitle("Vokabeltrainer - " + kartei.getBeschreibung());
 		topbar.setTitel("Lernen");
+		topbar.setImpFalse();
 		content.repaint();
 	}
 	
@@ -125,6 +129,10 @@ public class StartVokabeltrainer extends JFrame {
 			return container;
 		else
 			return getStartVokabelTrainer(container);
+	}
+	
+	public ViewLernkarteien getViewLernkarteien() {
+		return viewLernkarteien;
 	}
 	
 
