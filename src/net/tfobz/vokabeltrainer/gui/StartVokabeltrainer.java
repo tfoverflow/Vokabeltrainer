@@ -32,6 +32,7 @@ public class StartVokabeltrainer extends JFrame {
 	private JPanel content = null;
 	private int height = 1080;
 	private int width = 1920;
+	topbar topbar = new topbar();
 	
 	public StartVokabeltrainer() {
 		this.addComponentListener(new ComponentAdapter() {
@@ -67,7 +68,6 @@ public class StartVokabeltrainer extends JFrame {
 		c.gridy = 0;
 		c.gridwidth = 100;
 		c.gridheight = 1;
-		topbar topbar = new topbar();
 		topbar.setMaximumSize(new Dimension(1920, 75));
 		topbar.setMinimumSize(new Dimension(1920, 75));
 		topbar.setPreferredSize(new Dimension(1920, 75));
@@ -94,24 +94,28 @@ public class StartVokabeltrainer extends JFrame {
 		content.removeAll();
 		content.add(mainMenu);
 		this.setTitle("Vokabeltrainer - MainMenu");
+		topbar.setTitel("Vokabeltrainer");
 		content.repaint();
 	 }
 	public void changeToCreateLernkartei() {
 		this.content.removeAll();
 		content.add(createLernkartei);
 		this.setTitle("Vokabeltrainer - Lernkartei erstellen");
+		topbar.setTitel("Lernkartei erstellen");
 		content.repaint();
 	 }
 	public void changeToViewLernkarteien() {
 		this.content.removeAll();
 		content.add(viewLernkarteien);
 		this.setTitle("Vokabeltrainer - Lernkarteienübersicht");
+		topbar.setTitel("Lernkarteien");
 		content.repaint();
 	 }
 	public void changeToLearnAnsicht(Lernkartei kartei, Fach fach) {
 		this.content.removeAll();
 		content.add(new LernAnsicht(kartei, fach));
 		this.setTitle("Vokabeltrainer - " + kartei.getBeschreibung());
+		topbar.setTitel("Lernen");
 		content.repaint();
 	}
 	
