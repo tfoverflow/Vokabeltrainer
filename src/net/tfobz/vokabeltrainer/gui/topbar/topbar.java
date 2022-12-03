@@ -16,15 +16,18 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import net.tfobz.vokabeltrainer.gui.StartVokabeltrainer;
 import net.tfobz.vokabeltrainer.gui.createLernkartei.Import;
 
 public class topbar extends JPanel {
 	private static final long serialVersionUID = -7970622509539947502L;
 	private JLabel titel = new JLabel();
 	private JPanel importPanel = new JPanel();
-	private JPanel space = new JPanel();
+	private JPanel homePanel = new JPanel();
 	private JButton importButton = new JButton();
+	private JButton homeButton = new JButton();
 	ImageIcon upload = new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/upload.png");
+	ImageIcon home = new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/home.png");
 	Import importDialog = null;
 	
 	public topbar() {
@@ -36,6 +39,7 @@ public class topbar extends JPanel {
 
 		importPanel.setLayout(new BoxLayout(importPanel, BoxLayout.X_AXIS));
 		importPanel.setPreferredSize(new Dimension(150,75));
+		
 		importButton.setPreferredSize(new Dimension(50,50));
 		importButton.setMaximumSize(new Dimension(50,50));
 		importButton.setMinimumSize(new Dimension(50,50));
@@ -48,11 +52,25 @@ public class topbar extends JPanel {
 				importDialog.setVisible(true);
 			}
 		});
+				
+		homePanel.setLayout(new BoxLayout(homePanel, BoxLayout.X_AXIS));
+		homePanel.add(Box.createRigidArea(new Dimension(150,75)));
 		
-		space.setLayout(new BoxLayout(space, BoxLayout.X_AXIS));
-		space.add(Box.createRigidArea(new Dimension(150,75)));
+		homeButton.setPreferredSize(new Dimension(50,50));
+		homeButton.setMinimumSize(new Dimension(50,50));
+		homeButton.setMaximumSize(new Dimension(50,50));
+		homeButton.setIcon(home);
+		homeButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				((StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer(homePanel)).changeToMainMenu();
+			}
+		});
 
-		this.add(space,BorderLayout.LINE_START);
+		homePanel.add(homeButton);
+		
+		this.add(homePanel,BorderLayout.LINE_START);
 		this.add(titel,BorderLayout.CENTER);	
 		this.add(importPanel, BorderLayout.LINE_END);
 	}
@@ -64,13 +82,11 @@ public class topbar extends JPanel {
 	
 	public void setImpTrue() {
 		importPanel.add(importButton);
-		importPanel.add(Box.createRigidArea(new Dimension(100,75)));
 		importPanel.repaint();
 	}
 	
 	public void setImpFalse() {
 		importPanel.remove(importButton);
-		importPanel.remove(Box.createRigidArea(new Dimension(100,75)));
 		importPanel.repaint();
 	}
 }
