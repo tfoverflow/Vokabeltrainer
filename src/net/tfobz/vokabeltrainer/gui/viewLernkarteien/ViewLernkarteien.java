@@ -35,11 +35,11 @@ public class ViewLernkarteien extends JPanel {
 	public ViewLernkarteien() {
 //		this.add(topbar);
 		this.addComponentListener(new ComponentAdapter() {
-		public void componentResized(ComponentEvent e) {
-        height = (int) getHeight();
-        width = (int) getWidth();
-    }
-});
+			public void componentResized(ComponentEvent e) {
+				height = (int) getHeight();
+				width = (int) getWidth();
+			}
+		});
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		JPanel titelPanel = new JPanel();

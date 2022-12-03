@@ -91,7 +91,7 @@ public class FachAuswahl extends JDialog {
 			//Wenn Fach Faellig ist, wird der Rand rot gefaebt;
 			Boolean isFaellig = fach.getGelerntAm() != null ? fach.getErinnerungFaellig(): false;
 			newPanel.setBorder(BorderFactory.createTitledBorder (BorderFactory.createEtchedBorder((isFaellig ? Color.red : null), null),
-	                "Lorem",
+	                fach.getBeschreibung(),
 	                TitledBorder.CENTER,
 	                TitledBorder.TOP));
 			newPanel.setMaximumSize(new Dimension(450, 70));
