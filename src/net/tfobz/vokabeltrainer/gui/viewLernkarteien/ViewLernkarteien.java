@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 
 import net.tfobz.vokabeltrainer.gui.createLernkartei.Import;
 import net.tfobz.vokabeltrainer.gui.topbar.*;
+import net.tfobz.vokabeltrainer.model.Lernkartei;
 
 public class ViewLernkarteien extends JPanel {	
 
@@ -81,5 +82,9 @@ public class ViewLernkarteien extends JPanel {
 		
 		this.add(sammlung); 
 //		sammlung.setBackground(new Color(255, 0, 0));
+	}
+	
+	public void export(Lernkartei kartei) {
+		
 	}
 }

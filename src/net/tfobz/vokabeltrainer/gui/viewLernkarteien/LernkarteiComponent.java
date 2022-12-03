@@ -33,13 +33,13 @@ public class LernkarteiComponent extends JComponent {
 
 		this.setBackground(new Color(0, 255, 0));
 		this.setMinimumSize(new Dimension(300, 200));
-		// TODO Bissl Performance-Heavy.
+		/* TODO Bissl Performance-Heavy.
 		kartei.aktualisiereIsErinnerungfaellig();
 		if(kartei.isErinnerungfaellig())
 			this.setBorder(BorderFactory.createLineBorder(Color.red));
-		else
+		else*/
 			this.setBorder(BorderFactory.createLineBorder(Color.gray));
-
+		 
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 

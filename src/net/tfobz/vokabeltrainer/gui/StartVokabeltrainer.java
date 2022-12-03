@@ -40,6 +40,7 @@ public class StartVokabeltrainer extends JFrame {
 		this.setIconImage(new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/logo.png").getImage());
 		
 		mainMenu = new MainMenu(this);
+		this.changeToMainMenu();
 		createLernkartei = new CreateLernkartei();
 		viewLernkarteien = new ViewLernkarteien();
 		content = new JPanel();
