@@ -21,6 +21,7 @@ import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -29,6 +30,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
@@ -75,13 +77,13 @@ public class LernAnsicht extends JPanel {
 //		c.fill = GridBagConstraints.BOTH;
 
 		// Wort Eins
-		JLabel wortEinsLabel = new JLabel(kartei.getWortEinsBeschreibung());
+		JLabel wortEinsLabel = new JLabel(getWortEinsBeschreibungAccordingRichtung(kartei));
 		wortEinsLabel.setHorizontalAlignment(JLabel.CENTER);
 		c.gridx = 2;
 		c.gridwidth = 2;
 		this.add(wortEinsLabel, c);
 
-		wortEins = new JTextField(aktuelleKarte.getWortEins());
+		wortEins = new JTextField(kartei.getRichtung() ? aktuelleKarte.getWortEins() : aktuelleKarte.getWortZwei());
 		wortEins.setEditable(false);
 		wortEins.setPreferredSize(textFieldSize);
 		wortEins.setMinimumSize(textFieldSize);
@@ -91,7 +93,7 @@ public class LernAnsicht extends JPanel {
 		this.add(wortEins, c);
 
 		// Wort Zwei
-		JLabel wortZweiLabel = new JLabel(kartei.getWortZweiBeschreibung());
+		JLabel wortZweiLabel = new JLabel(getWortZweiBeschreibungAccordingRichtung(kartei));
 		wortZweiLabel.setHorizontalAlignment(JLabel.CENTER);
 		c.gridx = 2;
 		c.gridy = 1;
@@ -112,8 +114,48 @@ public class LernAnsicht extends JPanel {
 		c.gridwidth = 4;
 		this.add(wortZwei, c);
 
-		// Weiter & Auflösen
+		//Settings
+		JPanel settings = new JPanel();
+		JCheckBox grossKleinschreibung = new JCheckBox("Groß/Kleinschreibung beachten", kartei.getGrossKleinschreibung());
+		grossKleinschreibung.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				kartei.setGrossKleinschreibung(grossKleinschreibung.isSelected());
+				VokabeltrainerDB.aendernLernkartei(kartei);
+				aktuelleKarte = VokabeltrainerDB.getKarte(aktuelleKarte.getNummer());
+				wortEins.setText(kartei.getRichtung() ? aktuelleKarte.getWortEins() : aktuelleKarte.getWortZwei());
+			}
+		});
+		settings.add(grossKleinschreibung);
+		JToggleButton richtungButton = new JToggleButton(getWortEinsBeschreibungAccordingRichtung(kartei) + "⇾" + getWortZweiBeschreibungAccordingRichtung(kartei));
+		richtungButton.setSelected(kartei.getRichtung());
+		richtungButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				kartei.setRichtung(richtungButton.isSelected());
+				VokabeltrainerDB.aendernLernkartei(kartei);
+				richtungButton.setText(getWortEinsBeschreibungAccordingRichtung(kartei) + "⇾" + getWortZweiBeschreibungAccordingRichtung(kartei));
+				
+				//Aktualisiere Karte
+				aktuelleKarte = VokabeltrainerDB.getKarte(aktuelleKarte.getNummer());
+				
+				wortEinsLabel.setText(getWortEinsBeschreibungAccordingRichtung(kartei));
+				wortZweiLabel.setText(getWortZweiBeschreibungAccordingRichtung(kartei));
+				wortEins.setText(getWortEinsAccordingRichtung(kartei));
+			}
+		});
+		settings.add(richtungButton);
+		
+		
+		
+		
+		c.gridx = 2;
 		c.gridy = 2;
+		this.add(settings, c);
+		
+		// Weiter & Auflösen
+		c.gridy = 3;
 		JButton weiter = new JButton("Weiter");
 		weiter.setPreferredSize(buttonSize);
 		weiter.setMinimumSize(buttonSize);
@@ -134,7 +176,7 @@ public class LernAnsicht extends JPanel {
 						
 						wortZwei.setBorder(BorderFactory.createLineBorder(Color.red));
 						JOptionPane.showMessageDialog(null, 
-								"Wort wäre " + aktuelleKarte.getWortZwei() + " gewesen.", 
+								"Wort wäre " + getWortZweiAccordingRichtung(kartei) + " gewesen.", 
 								"Falsche Eingabe", 
 								JOptionPane.INFORMATION_MESSAGE, 
 								new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/info.png"));
@@ -186,7 +228,7 @@ public class LernAnsicht extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, 
-						"Wort wäre " + aktuelleKarte.getWortZwei() + " gewesen.", 
+						"Wort wäre " + getWortZweiAccordingRichtung(kartei) + " gewesen.", 
 						"Auflösung", 
 						JOptionPane.INFORMATION_MESSAGE, 
 						new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/info.png"));
@@ -242,7 +284,7 @@ public class LernAnsicht extends JPanel {
 		scrollpane.setPreferredSize(new Dimension(1000, 400));
 		c.weightx = 0.5;
 		c.gridx = 0;
-		c.gridy = 3;
+		c.gridy = 4;
 		c.gridwidth = 10;
 		c.gridheight = 10;
 		c.insets = new Insets(0, 20, 0, 20);
@@ -292,12 +334,28 @@ public class LernAnsicht extends JPanel {
 		setFocusCycleRoot(true);
 	}
 	
-	private void keineKarteImFach(Lernkartei kartei) {
+	protected void keineKarteImFach(Lernkartei kartei) {
 		JOptionPane.showMessageDialog(this, "Sie haben alle Karten in diesem Fach behandelt.");
 		StartVokabeltrainer startVokabeltrainer = (StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer(this);
 		startVokabeltrainer.changeToViewLernkarteien();
 		FachAuswahl fachAuswahl = new FachAuswahl(kartei, startVokabeltrainer);
 		fachAuswahl.setVisible(true);
+	}
+	
+	protected String getWortEinsBeschreibungAccordingRichtung(Lernkartei kartei) {
+		return kartei.getRichtung() ? kartei.getWortEinsBeschreibung() : kartei.getWortZweiBeschreibung();
+	}
+	
+	protected String getWortZweiBeschreibungAccordingRichtung(Lernkartei kartei) {
+		return kartei.getRichtung() ? kartei.getWortZweiBeschreibung() : kartei.getWortEinsBeschreibung();
+	}
+	
+	protected String getWortEinsAccordingRichtung(Lernkartei kartei) {
+		return kartei.getRichtung() ? aktuelleKarte.getWortEins() : aktuelleKarte.getWortZwei();
+	}
+	
+	protected String getWortZweiAccordingRichtung(Lernkartei kartei) {
+		return kartei.getRichtung() ? aktuelleKarte.getWortZwei() : aktuelleKarte.getWortEins();
 	}
 	
 }
