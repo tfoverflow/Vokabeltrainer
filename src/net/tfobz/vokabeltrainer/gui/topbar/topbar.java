@@ -78,6 +78,7 @@ public class topbar extends JPanel {
 	
 	public void setTitel(String t) {
 		titel.setText(t);
+		titel.setFont(new Font("Karumbi	", Font.BOLD, 40));
 	}
 	
 	public void setImpTrue() {
