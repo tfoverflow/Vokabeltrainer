@@ -1,6 +1,7 @@
 package net.tfobz.vokabeltrainer.gui.viewLernkarteien;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -52,13 +53,14 @@ public class LernkarteiComponent extends JComponent {
 		name = new JLabel(kartei.getBeschreibung());
 		name.setPreferredSize(new Dimension(250, 50));
 		name.setBorder(new MatteBorder(0, 0, 0, 1, Color.gray));
+		name.setHorizontalAlignment(JLabel.CENTER);
 
 		playButton = new JButton();
 		playButton.setPreferredSize(new Dimension(40, 40));
 		ImageIcon play_arrow = new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/play_arrow.png");
 		playButton.setIcon(play_arrow);
 		
-		// I'm sorry
+		// I'm not sorry
 		playButton.addActionListener(new ActionListener() {
 
 			@Override
