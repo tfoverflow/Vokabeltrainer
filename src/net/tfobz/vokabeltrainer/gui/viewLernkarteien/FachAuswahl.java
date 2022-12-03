@@ -6,8 +6,11 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,6 +31,9 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import datechooser.beans.DateChooserDialog;
+import datechooser.events.CommitEvent;
+import datechooser.events.CommitListener;
 import net.tfobz.vokabeltrainer.gui.StartVokabeltrainer;
 import net.tfobz.vokabeltrainer.model.Fach;
 import net.tfobz.vokabeltrainer.model.Lernkartei;
@@ -106,7 +112,8 @@ public class FachAuswahl extends JDialog {
 			gelerntAm.setHorizontalAlignment(JLabel.CENTER);
 			newPanel.add(gelerntAm);
 			
-			JLabel erinnerungFaellig = new JLabel();
+			
+			JButton erinnerungFaellig = new JButton();
 			if(fach.getGelerntAm() != null) {
 				SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 				Calendar c = Calendar.getInstance();
@@ -117,8 +124,40 @@ public class FachAuswahl extends JDialog {
 				erinnerungFaellig.setText("jetzt");
 			}
 			
+			
+			Calendar c2 = Calendar.getInstance();
+			if(fach.getGelerntAm() != null)
+				c2.setTime(fach.getGelerntAm());
+			
+			DateChooserDialog dateChooser = new DateChooserDialog();
+			dateChooser.setCurrent(c2);
+			dateChooser.addCommitListener(new CommitListener() {
+				@Override
+				public void onCommit(CommitEvent arg0) {
+					int erinnerungsintervall;
+					erinnerungsintervall = (int) ChronoUnit.DAYS.between(c2.toInstant(), dateChooser.getCurrent().toInstant());
+					
+					fach.setErinnerungsIntervall(erinnerungsintervall);
+					VokabeltrainerDB.aendernFach(fach);
+					
+					SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+					c2.add(Calendar.DAY_OF_MONTH, erinnerungsintervall);
+					erinnerungFaellig.setText(sdf.format(c2.getTime()));
+				}
+			});
+			erinnerungFaellig.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					dateChooser.showDialog(startVokabeltrainer, true);
+
+				}
+			});
+			
 			erinnerungFaellig.setHorizontalAlignment(JLabel.CENTER);
 			newPanel.add(erinnerungFaellig);
+			
+			
 			
 			//TODO Very performance-inefficient! Needs Improvements
 			JLabel nKarten = new JLabel(VokabeltrainerDB.getKarten(fach.getNummer()).size() + " Karten");
