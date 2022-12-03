@@ -80,8 +80,7 @@ public class LernkarteiComponent extends JComponent {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FachAuswahl fachAuswahl = new FachAuswahl(kartei, ((StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer((JButton) e.getSource())));
-				fachAuswahl.setVisible(true);
+				reloadFachAuswahl(kartei, ((StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer((JButton) e.getSource())));
 			}
 		});
 
@@ -109,6 +108,12 @@ public class LernkarteiComponent extends JComponent {
 		c.gridwidth = 3;
 		c.gridheight = 3;
 		this.add(playButton, c);
+	}
+
+	public void reloadFachAuswahl(Lernkartei kartei, StartVokabeltrainer startVokabeltrainer) {
+		
+		FachAuswahl fachAuswahl = new FachAuswahl(kartei, this, startVokabeltrainer);
+		fachAuswahl.setVisible(true);
 	}
 
 	private String getPercent(Lernkartei kartei) {

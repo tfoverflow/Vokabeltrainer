@@ -338,7 +338,7 @@ public class LernAnsicht extends JPanel {
 		JOptionPane.showMessageDialog(this, "Sie haben alle Karten in diesem Fach behandelt.");
 		StartVokabeltrainer startVokabeltrainer = (StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer(this);
 		startVokabeltrainer.changeToViewLernkarteien();
-		FachAuswahl fachAuswahl = new FachAuswahl(kartei, startVokabeltrainer);
+		FachAuswahl fachAuswahl = new FachAuswahl(kartei, null, startVokabeltrainer);
 		fachAuswahl.setVisible(true);
 	}
 	

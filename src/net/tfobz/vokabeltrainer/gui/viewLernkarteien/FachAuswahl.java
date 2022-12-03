@@ -37,7 +37,7 @@ public class FachAuswahl extends JDialog {
 
 	private static final long serialVersionUID = 3567286090716742665L;
 	
-	public FachAuswahl(Lernkartei kartei, StartVokabeltrainer startVokabeltrainer) {
+	public FachAuswahl(Lernkartei kartei, LernkarteiComponent parent, StartVokabeltrainer startVokabeltrainer) {
 		Box box= new Box(BoxLayout.Y_AXIS);
 		
 		
@@ -62,6 +62,8 @@ public class FachAuswahl extends JDialog {
 						});
 					});
 					JOptionPane.showMessageDialog(null, "Alle Karten wurden ins erste Fach verschoben", "Erfolg!", JOptionPane.INFORMATION_MESSAGE);
+					setVisible(false);
+					parent.reloadFachAuswahl(kartei, startVokabeltrainer);
 				}
 			}
 		});
@@ -127,8 +129,8 @@ public class FachAuswahl extends JDialog {
 			playButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					startVokabeltrainer.changeToLearnAnsicht(kartei, fach);
 					setVisible(false);
+					startVokabeltrainer.changeToLearnAnsicht(kartei, fach);
 				}
 			});
 			newPanel.add(playButton);
