@@ -16,6 +16,7 @@ public class topbar extends JPanel {
 	
 	private JLabel titel = new JLabel();
 	private JPanel importPanel = new JPanel();
+	private JPanel space = new JPanel();
 	private JButton importButton = new JButton();
 	
 	public topbar() {
@@ -27,12 +28,19 @@ public class topbar extends JPanel {
 		
 
 		importPanel.setLayout(new BoxLayout(importPanel, BoxLayout.X_AXIS));
-		importPanel.add(importButton);
 		importButton.setPreferredSize(new Dimension(50,50));
 		importButton.setMaximumSize(new Dimension(50,50));
 		importButton.setMinimumSize(new Dimension(50,50));
+		
+		importPanel.add(importButton);
+		importPanel.add(Box.createRigidArea(new Dimension(100,75)));
 		importPanel.setBorder(BorderFactory.createLineBorder(Color.cyan));
 		
+		space.setLayout(new BoxLayout(space, BoxLayout.X_AXIS));
+		space.setBorder(BorderFactory.createLineBorder(Color.cyan));
+		space.add(Box.createRigidArea(new Dimension(150,75)));
+
+		this.add(space,BorderLayout.LINE_START);
 		this.add(titel,BorderLayout.CENTER);	
 		this.add(importPanel, BorderLayout.LINE_END);
 	}
