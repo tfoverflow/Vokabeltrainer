@@ -85,6 +85,7 @@ public class StartVokabeltrainer extends JFrame {
 	public static void main(String[] args) {
 //		MainMenu mainMenu = new MainMenu();
 //		mainMenu.setVisible(true);
+		//setzt das Flatlaf theme
 		FlatDarkLaf.setup();
 		StartVokabeltrainer f = new StartVokabeltrainer();
 		f.setVisible(true);
