@@ -61,7 +61,14 @@ public class LernkarteiComponent extends JComponent {
 		name.setHorizontalAlignment(JLabel.CENTER);
 
 		JButton exportButton = new JButton(new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/download.png"));
-		exportButton.setPreferredSize(new Dimension(40, 40));
+		exportButton.setPreferredSize(new Dimension(50, 50));
+		exportButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				export(kartei);
+			}
+		});
 		
 		playButton = new JButton();
 		playButton.setPreferredSize(new Dimension(40, 40));
@@ -75,21 +82,20 @@ public class LernkarteiComponent extends JComponent {
 			public void actionPerformed(ActionEvent e) {
 				FachAuswahl fachAuswahl = new FachAuswahl(kartei, ((StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer((JButton) e.getSource())));
 				fachAuswahl.setVisible(true);
-//				export(kartei);
 			}
 		});
 
 
 		c.gridx = 0;
 		c.gridy = 0;
-		c.gridwidth = 7;
+		c.gridwidth = 10;
 		c.gridheight = 7;
 		this.add(percent, c);
 		
 		c.gridx = 7;
 		c.gridy = 3;
-		c.gridwidth = 2;
-		c.gridheight = 2;
+		c.gridwidth = 3;
+		c.gridheight = 3;
 		this.add(exportButton, c);
 
 		c.gridx = 0;
