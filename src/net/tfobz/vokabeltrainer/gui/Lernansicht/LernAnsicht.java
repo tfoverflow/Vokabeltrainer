@@ -1,7 +1,11 @@
 package net.tfobz.vokabeltrainer.gui.Lernansicht;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.DefaultFocusTraversalPolicy;
 import java.awt.Dimension;
+import java.awt.FocusTraversalPolicy;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -10,6 +14,7 @@ import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -78,6 +83,7 @@ public class LernAnsicht extends JPanel {
 		wortEins.setEditable(false);
 		wortEins.setPreferredSize(textFieldSize);
 		wortEins.setMinimumSize(textFieldSize);
+//		wortEins.setFocusable(false);
 		c.gridx = 4;
 		c.gridwidth = 4;
 		this.add(wortEins, c);
@@ -93,7 +99,6 @@ public class LernAnsicht extends JPanel {
 		wortZwei = new JTextField();
 		wortZwei.setPreferredSize(textFieldSize);
 		wortZwei.setMinimumSize(textFieldSize);
-		wortZwei.requestFocusInWindow();
 		wortZwei.addActionListener(new ActionListener() {
 			
 			@Override
@@ -142,6 +147,10 @@ public class LernAnsicht extends JPanel {
 					wortZwei.setText("");
 					wortZwei.setBorder(null);
 				}
+				//Setze Fokus auf Textfeldeingabe
+				weiter.setEnabled(false);
+				wortZwei.requestFocusInWindow();
+				weiter.setEnabled(true);
 			}
 		});
 		
@@ -170,6 +179,10 @@ public class LernAnsicht extends JPanel {
 				wortEins.setText(aktuelleKarte.getWortEins());
 				wortZwei.setText("");
 				wortZwei.setBorder(null);
+				//Setze Fokus auf Textfeldeingabe
+				aufloesen.setEnabled(false);
+				wortZwei.requestFocusInWindow();
+				aufloesen.setEnabled(true);
 			}
 		});
 		
@@ -217,6 +230,48 @@ public class LernAnsicht extends JPanel {
 		c.insets = new Insets(0, 20, 0, 20);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		this.add(scrollpane, c);
+		
+		// Deklariere Tab-Order
+		Vector<Component> order = new Vector<Component>(3);
+		order.add(wortZwei);
+		order.add(weiter);
+		order.add(aufloesen);
+		FocusTraversalPolicy focusTraversalPolicy = new FocusTraversalPolicy() {
+			
+			@Override
+			public Component getLastComponent(Container aContainer) {
+				return order.lastElement();
+			}
+			
+			@Override
+			public Component getFirstComponent(Container aContainer) {
+				return order.firstElement();
+			}
+			
+			@Override
+			public Component getDefaultComponent(Container aContainer) {
+				return order.firstElement();
+			}
+			
+			@Override
+			public Component getComponentBefore(Container aContainer, Component aComponent) {
+				if(aComponent.equals(order.firstElement()))
+					return order.lastElement();
+				else
+					return order.get(order.indexOf(aComponent)-1);
+			}
+			
+			@Override
+			public Component getComponentAfter(Container aContainer, Component aComponent) {
+				if (aComponent.equals(order.lastElement()))
+					return order.firstElement();
+				else
+					return order.get(order.indexOf(aComponent)+1);
+			}
+		};
+		
+		setFocusTraversalPolicy(focusTraversalPolicy);
+		setFocusCycleRoot(true);
 	}
 	
 	private void keineKarteImFach(Lernkartei kartei) {

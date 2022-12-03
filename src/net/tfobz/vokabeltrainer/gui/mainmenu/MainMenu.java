@@ -25,7 +25,6 @@ public class MainMenu extends JPanel {
 
 	public MainMenu(StartVokabeltrainer parentFrame) {
 		this.parentFrame = parentFrame;
-
 		this.setLayout(new GridBagLayout());
 
 		// Setzt das Theme, wenn möglich, aufs GTK-Theme.

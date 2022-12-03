@@ -25,4 +25,6 @@ hs_err_pid*
 #db data
 *.properties
 *.script
+/lernkarteien.lck
+/lernkarteien.properties.new
 /net/

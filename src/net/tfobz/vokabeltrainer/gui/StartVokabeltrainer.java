@@ -21,7 +21,6 @@ public class StartVokabeltrainer extends JFrame {
 	private ViewLernkarteien viewLernkarteien = null;
 	
 	public StartVokabeltrainer() {
-		
 		this.setSize(1200, 800); // Default Fenstergroesse, wenn Fenster nicht maximiert ist :3
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); // Starte Fenster maximiert :3
 		this.setLocationRelativeTo(null); //Öffne in der Bildschirmmitte :3
