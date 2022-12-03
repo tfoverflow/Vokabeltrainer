@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.BoxLayout;
@@ -28,8 +30,16 @@ public class StartVokabeltrainer extends JFrame {
 	private CreateLernkartei createLernkartei = null;
 	private ViewLernkarteien viewLernkarteien = null;
 	private JPanel content = null;
+	private int height = 1080;
+	private int width = 1920;
 	
 	public StartVokabeltrainer() {
+		this.addComponentListener(new ComponentAdapter() {
+			public void componentResized(ComponentEvent e) {
+				height = (int) getHeight();
+				width = (int) getWidth();
+			}
+		});
 		this.setLayout(new GridBagLayout());
 		this.setSize(1200, 800); // Default Fenstergroesse, wenn Fenster nicht maximiert ist :3
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); // Starte Fenster maximiert :3
@@ -57,7 +67,7 @@ public class StartVokabeltrainer extends JFrame {
 		c.gridy = 0;
 		c.gridwidth = 100;
 		c.gridheight = 1;
-		topbar topbar = new topbar(1920);
+		topbar topbar = new topbar();
 		topbar.setMaximumSize(new Dimension(1920, 75));
 		topbar.setMinimumSize(new Dimension(1920, 75));
 		topbar.setPreferredSize(new Dimension(1920, 75));
