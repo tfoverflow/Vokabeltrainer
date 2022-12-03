@@ -79,11 +79,11 @@ public class VokabeltrainerDB
 
 	static {
 		// L�scht Tabellen
-		// loeschenTabellen();
+//		 loeschenTabellen();
 		// Erstellen der Tabellen falls nicht vorhanden
 		 erstellenTabellen();
 		// Hinzuf�gen von Testdaten
-		// hinzufuegenTestdaten();
+		 hinzufuegenTestdaten();
 	}
 
 	/**
