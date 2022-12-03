@@ -6,6 +6,7 @@ import java.awt.Container;
 import java.awt.DefaultFocusTraversalPolicy;
 import java.awt.Dimension;
 import java.awt.FocusTraversalPolicy;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -255,13 +256,13 @@ public class LernAnsicht extends JPanel {
 		richtigeKarten = new DefaultTableModel(new String[]{kartei.getWortEinsBeschreibung(),kartei.getWortZweiBeschreibung()}, 0);
 		falscheKarten = new DefaultTableModel(new String[]{kartei.getWortEinsBeschreibung(),kartei.getWortZweiBeschreibung()}, 0);
 		JTable jTableRichtig = new JTable(richtigeKarten);
-		jTableRichtig.setBackground(new Color(0, 255, 0, 100));
+		jTableRichtig.setBackground(new Color(0, 150, 0));
 		jTableRichtig.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-		jTableRichtig.setPreferredSize(new Dimension(640, 400));
+		jTableRichtig.setPreferredSize(new Dimension(400, 1000));
 		JTable jTableFalsch = new JTable(falscheKarten);
-		jTableFalsch.setBackground(new Color(255, 0, 0, 100));
+		jTableFalsch.setBackground(new Color(150, 0, 0));
 		jTableFalsch.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-		jTableFalsch.setPreferredSize(new Dimension(640, 400));
+		jTableFalsch.setPreferredSize(new Dimension(400, 1000));
 		
 		JPanel tables = new JPanel();
 		JPanel panelTableRichtig = new JPanel();
@@ -279,8 +280,12 @@ public class LernAnsicht extends JPanel {
                 TitledBorder.TOP));
 		tables.add(panelTableFalsch);
 		
+		jTableFalsch.setForeground(Color.black);
+		jTableRichtig.setForeground(Color.black);
+		tables.setEnabled(false);
+		
 		JScrollPane scrollpane = new JScrollPane(tables);
-		scrollpane.setBorder(BorderFactory.createLineBorder(Color.red));
+		scrollpane.setBorder(BorderFactory.createLoweredBevelBorder());
 		scrollpane.setPreferredSize(new Dimension(1000, 400));
 		c.weightx = 0.5;
 		c.gridx = 0;
