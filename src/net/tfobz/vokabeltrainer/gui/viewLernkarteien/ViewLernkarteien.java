@@ -16,6 +16,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
 import net.tfobz.vokabeltrainer.gui.createLernkartei.Import;
 import net.tfobz.vokabeltrainer.gui.topbar.*;
@@ -61,7 +63,9 @@ public class ViewLernkarteien extends JPanel {
 		sammlung = new LernkarteienSammlung();
 //		sammlung.setSize(height,width);
 		sammlung.setLocation(0,100);
-		sammlung.setBorder(BorderFactory.createLineBorder(Color.red));
+		sammlung.setMinimumSize(new Dimension(width-800, 8000));
+		sammlung.setPreferredSize(new Dimension(width-500, 8000));
+		sammlung.setMaximumSize(new Dimension(width-400, 8000));
 		this.add(sammlung); 
 //		sammlung.setBackground(new Color(255, 0, 0));
 	}

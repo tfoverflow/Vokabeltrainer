@@ -3,6 +3,7 @@ package net.tfobz.vokabeltrainer.gui.viewLernkarteien;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -10,6 +11,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -68,9 +70,9 @@ public class LernkarteiComponent extends JComponent {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				FachAuswahl fachAuswahl = new FachAuswahl(kartei, ((StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer((JButton) e.getSource())));
-//				fachAuswahl.setVisible(true);
-				export(kartei);
+				FachAuswahl fachAuswahl = new FachAuswahl(kartei, ((StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer((JButton) e.getSource())));
+				fachAuswahl.setVisible(true);
+//				export(kartei);
 			}
 		});
 
@@ -132,7 +134,12 @@ public class LernkarteiComponent extends JComponent {
 			break;
 		}
 		default:
-			
+			if(JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this, "Lernkartei erfolgreich gespeichert! Soll die Datei im Explorer angezeigt werden?","Erfolg", JOptionPane.YES_NO_OPTION))
+				try {
+					Desktop.getDesktop().open(fileChooser.getCurrentDirectory());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 		}
 	}
 }
