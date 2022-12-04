@@ -44,15 +44,6 @@ public class ViewLernkarteien extends JPanel {
 		});
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	
-	//ActionListener für Buttons :3
-//			settings.addActionListener(new ActionListener() {
-//				
-//				@Override
-//				public void actionPerformed(ActionEvent e) {
-//					importDialog = new Import(sammlung);
-//					importDialog.setVisible(true);
-//				}
-//			});
 		
 		this.add(Box.createRigidArea(new Dimension(0,30)));
 		
@@ -62,8 +53,7 @@ public class ViewLernkarteien extends JPanel {
 		sammlung.setMinimumSize(new Dimension(width-800, 8000));
 		sammlung.setPreferredSize(new Dimension(width-500, 8000));
 		sammlung.setMaximumSize(new Dimension(width-400, 8000));
-		this.add(sammlung); 
-//		sammlung.setBackground(new Color(255, 0, 0));
+		this.add(sammlung);	
 	}
 	
 	public LernkarteienSammlung getSammlung() {

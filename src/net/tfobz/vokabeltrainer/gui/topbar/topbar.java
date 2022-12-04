@@ -15,9 +15,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 
 import net.tfobz.vokabeltrainer.gui.StartVokabeltrainer;
 import net.tfobz.vokabeltrainer.gui.createLernkartei.Import;
+import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
 
 public class topbar extends JPanel {
 	private static final long serialVersionUID = -7970622509539947502L;
@@ -25,10 +27,14 @@ public class topbar extends JPanel {
 	private JPanel importPanel = new JPanel();
 	private JPanel homePanel = new JPanel();
 	private JButton importButton = new JButton();
+	private JToggleButton filterErinnerungButton = new JToggleButton();
 	private JButton homeButton = new JButton();
 	ImageIcon upload = new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/upload.png");
+	ImageIcon filter = new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/filter.png");
+	ImageIcon filter_off = new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/filter_off.png");
 	ImageIcon home = new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/home.png");
 	Import importDialog = null;
+	Component glue = Box.createHorizontalGlue(), glue2 = Box.createHorizontalGlue();
 	
 	public topbar() {
 		this.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, Color.GRAY));
@@ -40,6 +46,7 @@ public class topbar extends JPanel {
 		importPanel.setLayout(new BoxLayout(importPanel, BoxLayout.X_AXIS));
 		importPanel.setPreferredSize(new Dimension(150,75));
 		
+		
 		importButton.setPreferredSize(new Dimension(50,50));
 		importButton.setMaximumSize(new Dimension(50,50));
 		importButton.setMinimumSize(new Dimension(50,50));
@@ -50,6 +57,23 @@ public class topbar extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				importDialog = new Import(importPanel);
 				importDialog.setVisible(true);
+			}
+		});
+		
+		// Filter, dass nur Karteien mit vergangenen Erinnerungsdatum angezeigt werden
+		filterErinnerungButton.setPreferredSize(new Dimension(50,50));
+		filterErinnerungButton.setMaximumSize(new Dimension(50,50));
+		filterErinnerungButton.setMinimumSize(new Dimension(50,50));
+		filterErinnerungButton.setIcon(filter);
+		filterErinnerungButton.setSelectedIcon(filter_off);
+		filterErinnerungButton.setToolTipText("Wenn aktiv, werden nur Lernkarteien mit vergangenen Erinnerungsdatum angezeigt.");
+		filterErinnerungButton.setSelected(VokabeltrainerDB.getEinstellungenLernkarteienMitErinnerung());
+		filterErinnerungButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+//				System.out.println(VokabeltrainerDB.setEinstellungenLernkarteienMitErinnerung(filterErinnerungButton.isSelected())); 
+				((StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer(homePanel)).changeToViewLernkarteien();
 			}
 		});
 				
@@ -83,11 +107,17 @@ public class topbar extends JPanel {
 	
 	public void setImpTrue() {
 		importPanel.add(importButton);
+		importPanel.add(glue);
+		importPanel.add(filterErinnerungButton);
+		importPanel.add(glue2);
 		importPanel.repaint();
 	}
 	
 	public void setImpFalse() {
 		importPanel.remove(importButton);
+		importPanel.remove(glue);
+		importPanel.remove(filterErinnerungButton);
+		importPanel.remove(glue2);
 		importPanel.repaint();
 	}
 }
