@@ -5,13 +5,17 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 
@@ -81,7 +85,24 @@ public class StartVokabeltrainer extends JFrame {
 		c.gridwidth = 100;
 		c.gridheight = 90;
 		this.add(content, c);
+		
+		/**
+		 * KeyBindings
+		 */
+		
+		// Beende Vokabeltrainer, wenn strg + Q gedrückt wird
+		topbar.getInputMap().put(KeyStroke.getKeyStroke("ctrl Q"), "quit");
+		topbar.getActionMap().put("quit", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("I'm quitting!");
+				dispose();
+			}
+		});
 	}
+	
+	
+	
 	public static void main(String[] args) {
 //		MainMenu mainMenu = new MainMenu();
 //		mainMenu.setVisible(true);
