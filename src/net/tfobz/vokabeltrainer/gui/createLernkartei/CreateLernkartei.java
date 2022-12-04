@@ -20,6 +20,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import net.tfobz.vokabeltrainer.gui.StartVokabeltrainer;
+import net.tfobz.vokabeltrainer.model.Fach;
 import net.tfobz.vokabeltrainer.model.Lernkartei;
 import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
 
@@ -29,6 +30,7 @@ public class CreateLernkartei extends JPanel {
 	private JCheckBox grossKleinschreibung = null;
 	ImageIcon checkbox = new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/checkbox.png");
 	ImageIcon checkbox_checked = new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/checkbox_checked.png");
+	Fach fach[] = new Fach[5];
 
 	public CreateLernkartei() {
 
@@ -44,6 +46,7 @@ public class CreateLernkartei extends JPanel {
 		beschreibungPanel.setMinimumSize(new Dimension(1000,50));
 		beschreibungPanel.setMaximumSize(new Dimension(1000,50));
 		beschreibungPanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
+		beschreibung.setFont(new Font(beschreibung.getFont().toString(), Font.PLAIN, 20));
 		beschreibungPanel.add(beschreibung);
 
 		//name
@@ -76,6 +79,7 @@ public class CreateLernkartei extends JPanel {
 		sprache1TextPanel.setMinimumSize(new Dimension(1000,50));
 		sprache1TextPanel.setMaximumSize(new Dimension(1000,50));
 		sprache1TextPanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
+		sprache1Text.setFont(new Font(sprache1Text.getFont().toString(), Font.PLAIN, 20));
 		sprache1TextPanel.add(sprache1Text);
 		
 		//Sprache2
@@ -96,6 +100,7 @@ public class CreateLernkartei extends JPanel {
 		sprache2TextPanel.setMinimumSize(new Dimension(1000,50));
 		sprache2TextPanel.setMaximumSize(new Dimension(1000,50));
 		sprache2TextPanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
+		sprache2Text.setFont(new Font(sprache2Text.getFont().toString(), Font.PLAIN, 20));
 		sprache2TextPanel.add(sprache2Text);
 		
 		//Slider
@@ -112,6 +117,9 @@ public class CreateLernkartei extends JPanel {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				sliderZahl.setText(Integer.toString(slider.getValue()));
+				for (int i = 0; i < slider.getValue(); i++) {
+					fach[i] = new Fach();
+				}
 			}
 			
 		});
@@ -147,6 +155,10 @@ public class CreateLernkartei extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				Lernkartei kartei = new Lernkartei(beschreibung.getText().trim(), sprache1Text.getText().trim(), sprache2Text.getText().trim(), true, grossKleinschreibung.isSelected());
 				VokabeltrainerDB.hinzufuegenLernkartei(kartei);
+				for (int i = 0; i < slider.getValue(); i++) {
+					fach[i].setBeschreibung("test");
+					VokabeltrainerDB.hinzufuegenFach(kartei.getNummer(), fach[i]);
+				}
 				setVisible(false);
 				((StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer(speicherPanel)).changeToViewLernkarteien();
 //				((StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer(speicherPanel)).getViewLernkarteien().getSammlung().reloadLernkarteien();
