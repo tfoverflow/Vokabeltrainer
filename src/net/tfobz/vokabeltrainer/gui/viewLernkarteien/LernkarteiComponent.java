@@ -12,6 +12,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -24,6 +29,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
 import net.tfobz.vokabeltrainer.gui.StartVokabeltrainer;
+import net.tfobz.vokabeltrainer.model.Fach;
 import net.tfobz.vokabeltrainer.model.Lernkartei;
 import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
 
@@ -34,6 +40,9 @@ public class LernkarteiComponent extends JComponent {
 	private JLabel name = null;
 
 	public JButton playButton = null;
+	
+	// Datum an dem die erste Erinnerung eines Faches eintritt
+	private Calendar earliestDate;
 
 	public LernkarteiComponent(Lernkartei kartei) {
 
@@ -116,8 +125,28 @@ public class LernkarteiComponent extends JComponent {
 		fachAuswahl.setVisible(true);
 	}
 
+	/**
+	 * Errechnet earliestDate (Datum an dem die erste Erinnerung eines Faches eintritt)
+	 * @param kartei
+	 * @return
+	 */
 	private String getPercent(Lernkartei kartei) {
-		return "69%";
+		ArrayList<Calendar> dates = new ArrayList<Calendar>();
+		ArrayList<Fach> faecher = (ArrayList<Fach>) VokabeltrainerDB.getFaecher(kartei.getNummer());
+		faecher.forEach((fach)->{
+			if (fach.getGelerntAm() != null && fach.getErinnerungsIntervall() != 0) {
+				Calendar erinnerungAm = Calendar.getInstance();
+				erinnerungAm.setTime(fach.getGelerntAm());
+				erinnerungAm.add(Calendar.DAY_OF_MONTH, fach.getErinnerungsIntervall());
+				
+				dates.add(erinnerungAm);
+			}
+		});
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+		if(dates.isEmpty())
+			return "<html><center style=\"font-size: 18;\">keine<br>Erinnerungen</center></html>";
+		else
+			return "<html><center style=\"font-size: 18;\">Nächste Erinnerung:<br>" + sdf.format(Collections.min(dates).getTime()) + "</html></center>";
 	}
 	
 	private void export(Lernkartei kartei) {
