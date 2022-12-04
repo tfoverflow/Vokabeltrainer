@@ -109,6 +109,7 @@ public class StartVokabeltrainer extends JFrame {
 	 }
 	public void changeToViewLernkarteien() {
 		this.content.removeAll();
+		viewLernkarteien.getSammlung().reloadLernkarteien();
 		content.add(viewLernkarteien);
 		this.setTitle("Vokabeltrainer - Lernkarteienübersicht");
 		topbar.setTitel("Lernkarteien");
