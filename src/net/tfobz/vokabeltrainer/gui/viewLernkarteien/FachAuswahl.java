@@ -3,6 +3,7 @@ package net.tfobz.vokabeltrainer.gui.viewLernkarteien;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -36,6 +37,7 @@ import datechooser.beans.DateChooserDialog;
 import datechooser.events.CommitEvent;
 import datechooser.events.CommitListener;
 import net.tfobz.vokabeltrainer.gui.StartVokabeltrainer;
+import net.tfobz.vokabeltrainer.gui.createLernkartei.Woerter;
 import net.tfobz.vokabeltrainer.model.Fach;
 import net.tfobz.vokabeltrainer.model.Lernkartei;
 import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
@@ -54,7 +56,7 @@ public class FachAuswahl extends JDialog {
 		this.setModal(true);
 		this.setResizable(false);
 		this.setTitle("Vokabeltrainer - Fachauswahl");
-		this.setMinimumSize(new Dimension(500, 500));
+		this.setMinimumSize(new Dimension(600, 500));
 		this.setLocationRelativeTo(null); //Öffne in der Bildschirmmitte :3
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		
@@ -79,16 +81,29 @@ public class FachAuswahl extends JDialog {
 			}
 		});
 		
-		
+		// Karten hinzufügen
+		JButton addKarten = new JButton(new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/plus.png"));
+		addKarten.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					Woerter worteingabe = new Woerter(kartei, parent);
+					worteingabe.setVisible(true);
+					dispose();
+					parent.reloadFachAuswahl(kartei, startVokabeltrainer);
+			}
+		});
+					
 		JPanel titlePanel = new JPanel();
-		titlePanel.setLayout(new GridLayout(1, 1));
+		titlePanel.setLayout(new GridLayout(1, 5));
 		titlePanel.setBorder(BorderFactory.createEtchedBorder());
-		titlePanel.setMaximumSize(new Dimension(400, 70));
+		titlePanel.setMaximumSize(new Dimension(500, 70));
 		titlePanel.add(new JLabel("Gelernt am", JLabel.CENTER));
-		titlePanel.add(new JLabel("Erinnerung am", JLabel.CENTER));
-		titlePanel.add(new JLabel("", JLabel.CENTER));
+		titlePanel.add(new JLabel("<html><center>Erinnerung<br>am</center></html>", JLabel.CENTER));
+		titlePanel.add(addKarten);
 		titlePanel.add(zuruecksetzen);
-		titlePanel.setMaximumSize(new Dimension(450, 50));
+		titlePanel.setPreferredSize(new Dimension(520, 50));
+		titlePanel.setMaximumSize(new Dimension(520, 50));
+		((GridLayout) titlePanel.getLayout()).setHgap(10);
 		box.add(Box.createVerticalStrut(10));
 		box.add(titlePanel);
 		box.add(Box.createVerticalStrut(25));
@@ -105,8 +120,8 @@ public class FachAuswahl extends JDialog {
 	                fach.getBeschreibung() != null ? fach.getBeschreibung() : "Fach "+ indexHier++, //Wenn kein Titel angegeben wird, hat da
 	                TitledBorder.CENTER,
 	                TitledBorder.TOP));
-			newPanel.setPreferredSize(new Dimension(475, 75));
-			newPanel.setMaximumSize(new Dimension(475, 75));
+			newPanel.setPreferredSize(new Dimension(520, 75));
+			newPanel.setMaximumSize(new Dimension(520, 75));
 			
 			//Gelernt am
 			JLabel gelerntAm = new JLabel(fach.getGelerntAm() != null ? fach.getGelerntAmEuropaeischString() : "noch nie");
@@ -179,6 +194,7 @@ public class FachAuswahl extends JDialog {
 			nKarten.setHorizontalAlignment(JLabel.CENTER);
 			newPanel.add(nKarten);
 			
+			
 			JButton playButton = new JButton(new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/play_arrow.png"));
 			playButton.addActionListener(new ActionListener() {
 				@Override
@@ -188,6 +204,8 @@ public class FachAuswahl extends JDialog {
 				}
 			});
 			newPanel.add(playButton);
+			
+			
 			
 			box.add(newPanel);
 			box.add(Box.createVerticalStrut(20));

@@ -86,7 +86,7 @@ public class LernkarteiComponent extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(deleteMe, 
-						"Wollen Sie wirklich die Lernkartei löschen?", 
+						"Wollen Sie wirklich die Lernkartei "+ kartei.getBeschreibung() + " löschen?", 
 						"Are you sure about that?", 
 						JOptionPane.YES_NO_OPTION)) {
 					if(VokabeltrainerDB.loeschenLernkartei(kartei.getNummer()) != -1)
@@ -142,7 +142,6 @@ public class LernkarteiComponent extends JComponent {
 	}
 
 	public void reloadFachAuswahl(Lernkartei kartei, StartVokabeltrainer startVokabeltrainer) {
-		
 		FachAuswahl fachAuswahl = new FachAuswahl(kartei, this, startVokabeltrainer);
 		fachAuswahl.setVisible(true);
 	}
