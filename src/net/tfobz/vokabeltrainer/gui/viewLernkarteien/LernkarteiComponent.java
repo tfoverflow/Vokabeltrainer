@@ -79,6 +79,23 @@ public class LernkarteiComponent extends JComponent {
 			}
 		});
 		
+		JButton deleteMe = new JButton(new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/delete.png"));
+		deleteMe.setPreferredSize(new Dimension(50, 50));
+		deleteMe.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(deleteMe, 
+						"Wollen Sie wirklich die Lernkartei löschen?", 
+						"Are you sure about that?", 
+						JOptionPane.YES_NO_OPTION)) {
+					if(VokabeltrainerDB.loeschenLernkartei(kartei.getNummer()) != -1)
+						JOptionPane.showMessageDialog(deleteMe, "Lernkartei wurde erfolgreich gelöscht");
+				}
+				((StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer(deleteMe)).changeToViewLernkarteien();
+			}
+		});
+		
 		playButton = new JButton();
 		playButton.setPreferredSize(new Dimension(40, 40));
 		ImageIcon play_arrow = new ImageIcon("src/net/tfobz/vokabeltrainer/gui/assets/play_arrow.png");
@@ -86,7 +103,6 @@ public class LernkarteiComponent extends JComponent {
 		
 		// I'm not sorry
 		playButton.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				reloadFachAuswahl(kartei, ((StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer((JButton) e.getSource())));
@@ -100,11 +116,17 @@ public class LernkarteiComponent extends JComponent {
 		c.gridheight = 7;
 		this.add(percent, c);
 		
-		c.gridx = 7;
-		c.gridy = 3;
+		c.gridx = 0;
+		c.gridy = 0;
 		c.gridwidth = 3;
 		c.gridheight = 3;
 		this.add(exportButton, c);
+		
+		c.gridx = 7;
+		c.gridy = 0;
+		c.gridwidth = 3;
+		c.gridheight = 3;
+		this.add(deleteMe, c);
 
 		c.gridx = 0;
 		c.gridy = 7;

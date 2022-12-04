@@ -72,7 +72,8 @@ public class topbar extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				System.out.println(VokabeltrainerDB.setEinstellungenLernkarteienMitErinnerung(filterErinnerungButton.isSelected())); 
+				System.out.println(VokabeltrainerDB.getEinstellungenLernkarteienMitErinnerung());
+				System.out.println(VokabeltrainerDB.setEinstellungenLernkarteienMitErinnerung(filterErinnerungButton.isSelected())); 
 				((StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer(homePanel)).changeToViewLernkarteien();
 			}
 		});
