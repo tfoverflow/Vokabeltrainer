@@ -104,15 +104,12 @@ public class FachAuswahl extends JDialog {
 	                TitledBorder.TOP));
 			newPanel.setMaximumSize(new Dimension(450, 70));
 			
-//			JLabel beschreibung = new JLabel(fach.getBeschreibung());
-//			beschreibung.setHorizontalAlignment(JLabel.CENTER);
-//			newPanel.add(beschreibung);
-			
+			//Gelernt am
 			JLabel gelerntAm = new JLabel(fach.getGelerntAm() != null ? fach.getGelerntAmEuropaeischString() : "noch nie");
 			gelerntAm.setHorizontalAlignment(JLabel.CENTER);
 			newPanel.add(gelerntAm);
 			
-			
+			//Erinnerung am
 			JButton erinnerungFaellig = new JButton();
 			if(fach.getGelerntAm() != null) {
 				SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
@@ -125,40 +122,45 @@ public class FachAuswahl extends JDialog {
 			}
 			
 			
-			Calendar c2 = Calendar.getInstance();
+			Calendar calGelerntAm = Calendar.getInstance();
 			if(fach.getGelerntAm() != null)
-				c2.setTime(fach.getGelerntAm());
+				calGelerntAm.setTime(fach.getGelerntAm());
 			
 			DateChooserDialog dateChooser = new DateChooserDialog();
-			dateChooser.setCurrent(c2);
+			dateChooser.setCurrent(calGelerntAm);
+			dateChooser.setMinDate(calGelerntAm);
 			dateChooser.addCommitListener(new CommitListener() {
 				@Override
 				public void onCommit(CommitEvent arg0) {
-					int erinnerungsintervall;
-					erinnerungsintervall = (int) ChronoUnit.DAYS.between(c2.toInstant(), dateChooser.getCurrent().toInstant());
+					//Setze gelerntAm zurueck
+					if(fach.getGelerntAm() != null)
+						calGelerntAm.setTime(fach.getGelerntAm());
 					
+					// Berechne Unterschied zwischen gelerntAm und ausgewählten Datum
+					int erinnerungsintervall = (int) ChronoUnit.DAYS.between(calGelerntAm.toInstant(), dateChooser.getSelectedDate().toInstant());
+					//Setze Intervall
 					fach.setErinnerungsIntervall(erinnerungsintervall);
 					VokabeltrainerDB.aendernFach(fach);
 					
+					//Ersetze Datum im Button
 					SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-					c2.add(Calendar.DAY_OF_MONTH, erinnerungsintervall);
-					erinnerungFaellig.setText(sdf.format(c2.getTime()));
+					calGelerntAm.add(Calendar.DAY_OF_MONTH, erinnerungsintervall);
+					erinnerungFaellig.setText(sdf.format(calGelerntAm.getTime()));
 				}
 			});
 			erinnerungFaellig.addActionListener(new ActionListener() {
-				
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					dateChooser.showDialog(startVokabeltrainer, true);
 
 				}
 			});
-			
 			erinnerungFaellig.setHorizontalAlignment(JLabel.CENTER);
 			newPanel.add(erinnerungFaellig);
 			
 			
 			
+			// nKarten - Wie viele Karten derzeit im Fach sind
 			//TODO Very performance-inefficient! Needs Improvements
 			JLabel nKarten = new JLabel(VokabeltrainerDB.getKarten(fach.getNummer()).size() + " Karten");
 			nKarten.setHorizontalAlignment(JLabel.CENTER);
