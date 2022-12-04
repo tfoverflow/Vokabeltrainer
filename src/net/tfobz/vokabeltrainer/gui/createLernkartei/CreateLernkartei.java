@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -47,6 +49,19 @@ public class CreateLernkartei extends JPanel {
 		beschreibungPanel.setMaximumSize(new Dimension(1000,50));
 		beschreibungPanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
 		beschreibung.setFont(new Font(beschreibung.getFont().toString(), Font.PLAIN, 20));
+		beschreibung.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				((JTextField) e.getSource()).setBorder(null);
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {}
+		});
 		beschreibungPanel.add(beschreibung);
 
 		//name
@@ -64,7 +79,7 @@ public class CreateLernkartei extends JPanel {
 		//Sprache1
 		JLabel sprache1 = new JLabel("Sprache 1");
 		JPanel sprache1Panel = new JPanel();
-		sprache1Panel.setLayout((new BoxLayout(sprache1Panel, BoxLayout.Y_AXIS)));
+		sprache1Panel.setLayout((new BoxLayout(sprache1Panel, BoxLayout.X_AXIS)));
 		sprache1.setFont(new Font(sprache1.getFont().toString(), Font.PLAIN, 30));
 		sprache1Panel.setPreferredSize(new Dimension(1000,50));
 		sprache1Panel.setMinimumSize(new Dimension(1000,50));
@@ -80,6 +95,19 @@ public class CreateLernkartei extends JPanel {
 		sprache1TextPanel.setMaximumSize(new Dimension(1000,50));
 		sprache1TextPanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
 		sprache1Text.setFont(new Font(sprache1Text.getFont().toString(), Font.PLAIN, 20));
+		sprache1Text.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				((JTextField) e.getSource()).setBorder(null);
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {}
+		});
 		sprache1TextPanel.add(sprache1Text);
 		
 		//Sprache2
@@ -101,10 +129,24 @@ public class CreateLernkartei extends JPanel {
 		sprache2TextPanel.setMaximumSize(new Dimension(1000,50));
 		sprache2TextPanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
 		sprache2Text.setFont(new Font(sprache2Text.getFont().toString(), Font.PLAIN, 20));
+		sprache2Text.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				((JTextField) e.getSource()).setBorder(null);
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {}
+		});
 		sprache2TextPanel.add(sprache2Text);
 		
 		//Slider
 		JSlider slider = new JSlider(2,5);
+		slider.setValue(2);
 		JPanel sliderPanel = new JPanel();
 		sliderPanel.setLayout((new BoxLayout(sliderPanel, BoxLayout.X_AXIS)));
 		sliderPanel.setPreferredSize(new Dimension(1000,50));
@@ -117,9 +159,6 @@ public class CreateLernkartei extends JPanel {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				sliderZahl.setText(Integer.toString(slider.getValue()));
-				for (int i = 0; i < slider.getValue(); i++) {
-					fach[i] = new Fach();
-				}
 			}
 			
 		});
@@ -145,28 +184,69 @@ public class CreateLernkartei extends JPanel {
 		gkPanel.add(gkText);
 		
 		//Speichern
-		JButton speichern = new JButton("Speichern");
-		JPanel speicherPanel = new JPanel();
-		speichern.setPreferredSize(new Dimension(150, 50));
-		speichern.setFont(new Font(speichern.getFont().toString(), Font.PLAIN, 20));
-		speichern.addActionListener(new ActionListener() {
-
+//		JButton speichern = new JButton("Speichern");
+//		JPanel speicherPanel = new JPanel();
+//		speichern.setPreferredSize(new Dimension(150, 50));
+//		speichern.setFont(new Font(speichern.getFont().toString(), Font.PLAIN, 20));
+//		speichern.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				Lernkartei kartei = new Lernkartei(beschreibung.getText().trim(), sprache1Text.getText().trim(), sprache2Text.getText().trim(), true, grossKleinschreibung.isSelected());
+//				VokabeltrainerDB.hinzufuegenLernkartei(kartei);
+//				for (int i = 0; i < slider.getValue(); i++) {
+//					fach[i].setBeschreibung("test");
+//					VokabeltrainerDB.hinzufuegenFach(kartei.getNummer(), fach[i]);
+//				}
+//				setVisible(false);
+//				((StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer(speicherPanel)).changeToViewLernkarteien();
+////				((StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer(speicherPanel)).getViewLernkarteien().getSammlung().reloadLernkarteien();
+////				((StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer(speicherPanel)).getViewLernkarteien().getSammlung().repaint();
+//			}
+//			
+//		});
+//		speicherPanel.add(speichern);
+		
+		//weiter Knopf
+		JButton weiter = new JButton();
+		JPanel weiterPanel = new JPanel();
+		weiter.setPreferredSize(new Dimension(150,50));
+		weiter.setText("Weiter");
+		weiter.setFont(new Font(weiter.getFont().toString(), Font.PLAIN, 20));
+		weiter.addActionListener(new ActionListener() {
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Lernkartei kartei = new Lernkartei(beschreibung.getText().trim(), sprache1Text.getText().trim(), sprache2Text.getText().trim(), true, grossKleinschreibung.isSelected());
-				VokabeltrainerDB.hinzufuegenLernkartei(kartei);
-				for (int i = 0; i < slider.getValue(); i++) {
-					fach[i].setBeschreibung("test");
-					VokabeltrainerDB.hinzufuegenFach(kartei.getNummer(), fach[i]);
+				if (beschreibung.getText().trim().isEmpty() || sprache1Text.getText().trim().isEmpty() || sprache2Text.getText().trim().isEmpty()) {
+					if (beschreibung.getText().trim().isEmpty()){
+						beschreibung.setBorder(BorderFactory.createLineBorder(Color.red));
+					}
+					if (sprache1Text.getText().trim().isEmpty()) {
+						sprache1Text.setBorder(BorderFactory.createLineBorder(Color.red));
+					}
+					if (sprache2Text.getText().trim().isEmpty()){
+						sprache2Text.setBorder(BorderFactory.createLineBorder(Color.red));
+					}
+				} else {
+					Lernkartei kartei = new Lernkartei(beschreibung.getText().trim(), sprache1Text.getText().trim(), sprache2Text.getText().trim(), true, grossKleinschreibung.isSelected());
+					beschreibung.setText("");
+					sprache1Text.setText("");
+					sprache2Text.setText("");
+					grossKleinschreibung.setSelected(false);
+					VokabeltrainerDB.hinzufuegenLernkartei(kartei);
+					Fach fach[] = new Fach[slider.getValue()];
+					for (int i = 0; i < slider.getValue(); i++) {
+						fach[i] = new Fach();
+						VokabeltrainerDB.hinzufuegenFach(kartei.getNummer(), fach[i]);
+					}
+					Woerter worteingabe = new Woerter(kartei,weiterPanel);
+					worteingabe.setVisible(true);
 				}
-				setVisible(false);
-				((StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer(speicherPanel)).changeToViewLernkarteien();
-//				((StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer(speicherPanel)).getViewLernkarteien().getSammlung().reloadLernkarteien();
-//				((StartVokabeltrainer) StartVokabeltrainer.getStartVokabelTrainer(speicherPanel)).getViewLernkarteien().getSammlung().repaint();
 			}
-			
 		});
-		speicherPanel.add(speichern);
+		
+		weiterPanel.add(weiter);
+		
 		
 		
 		this.add(Box.createRigidArea(new Dimension(1920,75)));
@@ -183,7 +263,7 @@ public class CreateLernkartei extends JPanel {
 		this.add(Box.createRigidArea(new Dimension(1920,30)));
 		this.add(gkPanel);
 		this.add(Box.createRigidArea(new Dimension(1920,100)));
-		this.add(speicherPanel);
+//		this.add(speicherPanel);
+		this.add(weiterPanel);		
 		}
-
 }

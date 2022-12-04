@@ -95,7 +95,7 @@ public class Import extends JDialog {
 				
 				@Override
 				public void keyPressed(KeyEvent e) {}
-			});;
+			});
 
 			panels[i].add(labels[i]);
 			if (i != 3)
